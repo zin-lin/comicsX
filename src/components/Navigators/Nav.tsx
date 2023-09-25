@@ -17,7 +17,7 @@ export default function Nav () {
     return (
         <nav>
             <div>
-                <img className='items' src={logo} style={{fontSize:19, margin:12, marginTop:"7px", marginBottom:'auto', width:'078px'}}>
+                <img className='items' src={logo} style={{fontSize:19, margin:12, marginTop:"7px", marginLeft:23, marginBottom:'auto', height:'078px'}}>
                 </img>
             </div>
             <div className='hider' style={{right:10, position:'absolute', display:'flex', height:'100%', alignItems:'center'}}>

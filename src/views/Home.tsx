@@ -22,7 +22,7 @@ export default function Home (){
 
     useEffect(() => {
         setOpacity(1);
-        const fullText = "ENUCS is the leading society hosting contributors from all around the world. Join us explore the world of tomorrow by clicking the button below."; // The complete text to append
+        const fullText = "comicsX is the leading society hosting contributors from all around the world. Join us explore the world of ai and comics by clicking the button below."; // The complete text to append
         let currentIndex = 0;
         const appendText = () => {
             if (currentIndex < fullText.length) {
@@ -58,9 +58,9 @@ export default function Home (){
                         <div style={{paddingLeft:'40px', paddingRight:'20px'}}>
                             <p className='web-console' style={{margin:'7px'}}><span style={{color:'grey'}}>{'>>'}</span> Hello <span className='red'>World</span></p>
                             <p className='web-console small'>........</p>
-                            <p className='web-console small'>{'<'} This is <span className='red'>where</span> your journey <span style={{color:'grey'}}>begins</span> with ENU<span
+                            <p className='web-console small'>{'<'} Let <span className='red'>me</span> introduce your <span style={{color:'grey'}}>journey</span> with Com<span
                             className='red'
-                            >CS</span>{'>'}</p>
+                            >icsX</span>{'>'}</p>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export default function Home (){
                     </div>
                     <div className='full' style={{width:'60%', position:"absolute", minHeight:'50px', overflow:"auto", display:'flex', alignItems:'center'}} >
                         <div style={{margin:"auto", top:'auto'}}>
-                            <p className='enucs' >{'{'}enu<span className='red'>cs</span>{'}'}</p>
+                            <p className='enucs' >{'['}com<span className='red'>icsX</span>{']'}</p>
                             <div style={{border:'3px', borderStyle:'solid', marginLeft:'22%', padding:'20px', marginRight:'22%',width:'auto',
                                 borderRadius:'0px 82px 0px 0px',  transition:'0.4s ease'
                             }}>
@@ -88,13 +88,13 @@ export default function Home (){
                                     dispatch(toRegister());
                                     navigate('/profile');
                                 }
-                            }>Join Us Now</button>
+                            }>Create a Book Now</button>
                             <br/><br/>
                             <button className='orangex shOrange' style={{width:'200px',padding:'10px'}}
                             onClick={()=>{
                                 window.location.href = ("https://napier.ac.uk/courses");
                             }}
-                            >Join Napier</button>
+                            >My Projects</button>
                         </div>
                     </div>
                 </div>

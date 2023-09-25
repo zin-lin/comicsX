@@ -23,7 +23,7 @@ export default function MobileHome (){
                               borderRadius:'0px 52px 0px 0px'
                             }}>
                             <p className='text-shadow' style={{width:'70%', margin:"auto",  fontWeight:'normal', border:'2px'}}>
-                                <b>Greetings Dear Devs!</b> Welcome to ENUCS</p>
+                                <b>Greetings Creators!</b> </p>
                             </div>
                                 <br/>
                             <button className='redx shRed' style={{width:'200px',padding:'10px', margin:'10px', zIndex:15}}
@@ -32,7 +32,7 @@ export default function MobileHome (){
                                         dispatch(toRegister());
                                         navigate('/profile');
                                     }}
-                            >Join Us Now</button>
+                            >Explore Projects</button>
                         </div>
                     </div>
                 </div>
