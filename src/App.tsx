@@ -11,6 +11,7 @@ import {Provider} from "react-redux";
 import authStore from "./redux/store";
 import Search from "./views/Search";
 import loginStore from "./redux/stateStores/loginStore";
+import Events from "./views/Events";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                         <Route element={<Home/>} path='/' />
                         <Route element={<About/>} path='/about' />
                         <Route element={<Profile/>} path='/profile' />
+                        <Route element={<Events/>} path='/events' />
                         <Route element={<Search/>} path='/search' />
                     </Routes>
               </div>

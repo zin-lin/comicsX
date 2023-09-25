@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Provider, useSelector} from "react-redux";
 import loginStore from "../redux/stateStores/loginStore";
 import {useLoginSelector, useLoginDispatch, useAuthSelector, useAuthDispatch} from "../redux/hook";
@@ -10,9 +10,16 @@ function Renderer (){
     ctrl = useAuthSelector(state => state.auth.text);
     const dispatcher = useAuthDispatch();
     dispatcher(toProfile());
+    const [opacity, setOpacity] = useState(0);
+
+    useEffect(()=>{
+        setOpacity(1);
+    }, []);
+
+
     return (
 
-            <div style={{width:'100%', height:'100%', display:'flex', flex:1, position:'relative'}}>
+            <div style={{width:'100%', height:'100%', display:'flex', flex:1, position:'relative', transition:'0.6s ease', opacity:opacity}}>
                 <div className='full-bg-img'>
                 </div>
                 <div className='full-bg-img-mask'>
@@ -58,7 +65,7 @@ function Renderer (){
 export default function Profile () {
 
     /*
-    This bit has to do with talking to the BE Docker
+    This bit has to do with talking to the BankEnd Docker
     auth should be a listener for authentication
     as of for now let's call it false for
     GLOBAL AUTH HERE IF AUTHED, setAuth (true)

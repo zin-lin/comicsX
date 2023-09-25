@@ -90,7 +90,11 @@ export default function Home (){
                                 }
                             }>Join Us Now</button>
                             <br/><br/>
-                            <button className='orangex shOrange' style={{width:'200px',padding:'10px'}} >Join Napier</button>
+                            <button className='orangex shOrange' style={{width:'200px',padding:'10px'}}
+                            onClick={()=>{
+                                window.location.href = ("https://napier.ac.uk/courses");
+                            }}
+                            >Join Napier</button>
                         </div>
                     </div>
                 </div>

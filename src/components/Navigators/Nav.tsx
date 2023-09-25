@@ -22,7 +22,7 @@ export default function Nav () {
             </div>
             <div className='hider' style={{right:10, position:'absolute', display:'flex', height:'100%', alignItems:'center'}}>
                 <Link onClick={()=> dispatch(toHome())} to='/'><p style={{fontSize:16, margin:12 }}>Ho<span style={{color:"#FF5757"}}>me</span></p></Link>
-                <Link onClick={()=> dispatch(toEvent())} to='/'><p style={{fontSize:16, margin:12 }}>Eve<span style={{color:"#FF5757"}}>nts</span></p></Link>
+                <Link onClick={()=> dispatch(toEvent())} to='/events'><p style={{fontSize:16, margin:12 }}>Eve<span style={{color:"#FF5757"}}>nts</span></p></Link>
                 <Link onClick={()=> dispatch(toProfile())} to='/profile'><p style={{fontSize:16, margin:12 }}>Pro<span style={{color:"#FF5757"}}>file </span></p></Link>
                 <Link onClick={()=> dispatch(resetAllVs())} to='/search'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined">
                 search
