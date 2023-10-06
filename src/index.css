@@ -60,6 +60,8 @@ App{
 
 }
 
+
+
 /* layout styles */
 nav{
   background:  var(--primary) ;
@@ -231,7 +233,7 @@ ROM SPECIAL
   width: 100%;
   height: calc(100vh - 78px);
   flex: 1;
-  background: #131F2E;
+  background: #121126;
   margin-bottom: 0px;
   margin-top:78px;
   bottom: 0;
@@ -629,11 +631,18 @@ p.aText {
   color: rgba(103, 103, 103, 0.75);
 }
 
+
+
+
 .wrap-text-white{
   transition: 0.4s ease;
   width: 280px;
   color: #a2a2a2;
   minWidth:280px,
+}
+
+.lengify{
+  transition: 0.4s ease;
 }
 
 @media screen and (max-width: 800px)
@@ -653,9 +662,11 @@ p.aText {
 
 @media screen and (max-width: 600px) {
 
+
   .web-console{font-size: 20px}
   .small{font-size: 20px}
 }
+
 
 .mobile-view{
   width: 0px;
@@ -674,6 +685,20 @@ p.aText {
   background-repeat: no-repeat;
 }
 
+.highlight{
+  border-radius: 7px;
+  padding: 5px;
+  padding-left: 14px;
+  padding-right: 14px;
+  background-color: #e7e7e7;
+  color: #131F2E;
+  transition: 0.4s ease;
+}
+
+.highlight:hover{
+  background-color: #ddd;
+  box-shadow: 2px 2px 7px rgba(100,100,100,0.4);
+}
 
 
 @media screen and (max-width: 900px) {
@@ -771,11 +796,25 @@ p.aText {
   }
 }
 
+.bigfor{
+  transition: 0.4s ease;
+}
+
+
+@media screen and (max-width: 1780px)
+{
+  .bigfor{
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+  }
+}
 
 /*________*/
 
 @media screen and (min-width: 1090px)
 {
+
 
   .items{
     font-size: 16px;
@@ -898,7 +937,21 @@ p.aText {
   }
 }
 
+  .lengify{
+    width: 650px;
+  }
+
+
+
+@media screen and (max-width: 700px){
+  .lengify{
+    width: 330px;
+  }
+}
+
 @media  screen and (max-width: 500px) {
+
+
   .mobile-nav-item4{
     visibility: visible;
   }

@@ -4,6 +4,10 @@ import {Link, useNavigate} from "react-router-dom";
 import MobileHome from "../components/MobileHome";
 import {toHome, toProfile, toRegister} from "../redux/authState";
 import {useAuthDispatch, useAuthSelector} from "../redux/hook";
+import hero from '../assets/hero.jpg'
+import girl from '../assets/girl.jpg'
+import beach from '../assets/beach.jpg'
+import shelby from '../assets/shelby.jpg'
 
 export default function Home (){
 
@@ -11,6 +15,7 @@ export default function Home (){
     const [text, setText]= useState("");
     const ref = useRef<string>();
     ref.current = text;
+    const [home, setHome] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useAuthDispatch();
@@ -21,6 +26,7 @@ export default function Home (){
     enucs = useAuthSelector(state => state.auth.enucs);
 
     useEffect(() => {
+        fetch("/home").then(res =>res.text()).then(data=> setHome(data));
         setOpacity(1);
         const fullText = "comicsX is the leading society hosting contributors from all around the world. Join us explore the world of ai and comics by clicking the button below."; // The complete text to append
         let currentIndex = 0;
@@ -73,7 +79,7 @@ export default function Home (){
                         <div style={{margin:"auto", top:'auto'}}>
                             <p className='enucs' >{'['}com<span className='red'>icsX</span>{']'}</p>
                             <div style={{border:'3px', borderStyle:'solid', marginLeft:'22%', padding:'20px', marginRight:'22%',width:'auto',
-                                borderRadius:'0px 82px 0px 0px',  transition:'0.4s ease'
+                                borderRadius:'0px 82px 0px 0px',  transition:'0.4s ease', minHeight:113, alignSelf:'center'
                             }}>
                             <p className='text-shadow hider' style={{width:'60%', margin:"auto", transition:'0.4s ease '}}>
                                 {text}
@@ -92,7 +98,7 @@ export default function Home (){
                             <br/><br/>
                             <button className='orangex shOrange' style={{width:'200px',padding:'10px'}}
                             onClick={()=>{
-                                window.location.href = ("https://napier.ac.uk/courses");
+
                             }}
                             >My Projects</button>
                         </div>
@@ -104,35 +110,105 @@ export default function Home (){
             <div style={{position:'relative', zIndex:6}}>
                 <MobileHome/>
             </div>
-            <div style={{zIndex:9, height:'auto', background:'var(--primary)', marginTop:-2 ,position:'relative', padding:'30px'}}>
-                <div style={{flex:2, display:'flex',  height:'auto', width:'auto', justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
-                    <div style={{borderRadius:12,background:'#fff', height:'100%', padding:'20px', margin:'20px'}} className='wrap-text-white'>
-                        <div style={{display:'flex'}}>
-                            <div className='circle' style={{background:'grey'}}></div><div className='circle back-red'></div>
+
+
+
+
+            <div className='bigfor' style={{zIndex:19,marginTop:-2,
+                background:'var(--primary)' ,position:'relative', padding:'0px', width:'100%'}}>
+                <div className='bigfor' style={{flex:2, display:'flex',  width:'100%',
+                    justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
+                    <div style={{display:'flex',alignItems:'center', width:'100%'}}>
+                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={shelby}>
+
+                        </img>
+                        <div style={{width:'30%', position:'relative', }}>
+                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create impeccable
+                                <span style={{color:'red'}}> Characters </span>
+                                 with the help of your <span style={{color:'red'}}>immigination </span>
+                                 and our <span style={{color:'red'}}>tools</span>{']'}</p>
+                            <div style={{display:'flex'}}>
+                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
+                            </div>
                         </div>
-                        <p>"I'm sure there will continue to be exciting new products and major changes, but it looks as if the existing technology has a great deal of room to grow and prosper.
-                        "</p>
-                        <p><b>Jack Kilby</b></p>
                     </div>
-                    <div style={{borderRadius:12,background:'#fff', height:'100%', padding:'20px', margin:'20px'}} className='wrap-text-white'>
-                        <div style={{display:'flex'}}>
-                            <div className='circle' style={{background:'grey'}}></div><div className='circle' style={{background:'orange'}}></div>
+                </div>
+                <div style={{flex:2, display:'flex',  width:'100%',
+                    justifyContent:"right", flexWrap:'wrap', order:2, flexDirection:'row'}}>
+                    <div className='bigfor' style={{display:'flex',alignItems:'center', justifyContent:'right', width:'100%'}}>
+
+                        <div style={{width:'30%',paddingLeft:"170px" }}>
+                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create hundreds of
+                                <span style={{color:'orange'}}> Lore </span>
+                                and fully unleash your <span style={{color:'orange'}}> potential </span>
+                                as a  <span style={{color:'orange'}}>creator</span>{']'}</p>
+                            <div style={{display:'flex'}}>
+                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
+                            </div>
                         </div>
-                        <p>"I think it's fair to say that personal computers have become the most empowering tool we've ever created. They're tools of creativity
-                        and they can be shaped by their users."</p>
-                        <p><b>Bill Gates</b></p>
+                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={girl}>
+
+                        </img>
                     </div>
-                    <div style={{borderRadius:12,background:'#fff', height:'100%', padding:'20px', margin:'20px'}} className='wrap-text-white'>
-                        <div style={{display:'flex'}}>
-                            <div className='circle' style={{background:'grey'}}></div><div className='circle back-pink' ></div>
+                </div>
+                <div className='bigfor' style={{flex:2, display:'flex',  width:'100%',
+                    justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
+                    <div style={{display:'flex',alignItems:'center', width:'100%'}}>
+                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={beach}>
+
+                        </img>
+                        <div style={{width:'30%', position:'relative', }}>
+                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create perfect
+                                <span style={{color:'red'}}> Scenery </span>
+                                for your stories and <span style={{color:'red'}}>contribute </span>
+                                to our <span style={{color:'red'}}>community</span>{']'}</p>
+                            <div style={{display:'flex'}}>
+                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
+                            </div>
                         </div>
-                        <p>"The idea behind digital computers may be explained by saying that these machines are intended to carry out any operations which
-                            could be done by a human computer"</p>
-                        <p><b>Alan Turing</b></p>
                     </div>
                 </div>
             </div>
 
+            <div style={{zIndex:9, height:'auto', background:'#121126', marginTop:-2 ,position:'relative', padding:'30px'}}>
+                <br/>
+                <div style={{display:'flex', alignItems:'center', width:"100%", alignContent:'center', justifyContent:"center"}}>
+                    <p style={{color:"#aaa", fontSize:23, fontWeight:"bold"}}>We Offer</p>
+                </div>
+                <div style={{flex:2, display:'flex',  height:'auto', width:'auto', justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
+                    <div style={{borderRadius:12,background:'#ff8b4f', height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
+                        <div style={{display:'flex'}}>
+                            <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
+                        </div>
+                        <p>Build your world and write novels with freedom and publish to our servers as well as download to local devices.
+                            "</p>
+                        <p><b>Fact 1</b></p>
+                    </div>
+                    <div style={{borderRadius:12,background:'#f14d66', height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
+                        <div style={{display:'flex'}}>
+                            <div className='circle' style={{background:'white'}}></div><div className='circle' style={{background:'orange'}}></div>
+                        </div>
+                        <p>Annex's newest project after the launch of AnnexFood, this is a more optimistic project with higher scope</p>
+                        <p><b>Powered by @Annex</b></p>
+                    </div>
+                    <div style={{borderRadius:12,background:'#FF5757', height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
+                        <div style={{display:'flex'}}>
+                            <div className='circle' style={{background:'white'}}></div><div className='circle back-pink' ></div>
+                        </div>
+                        <p>Use the latest embedded AI technologies from OpenAI and more to help you write stories, revise, create and generate ideas</p>
+                        <p><b>With OpenAI's help</b></p>
+                    </div>
+                    <div style={{borderRadius:12,background:'#ff8b4f', height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
+                        <div style={{display:'flex'}}>
+                            <div className='circle' style={{background:'white'}}></div><div className='circle back-pink' ></div>
+                        </div>
+                        <p>A platform with AI assisted creativity sessions not just for comics but novels, blogs and learning tools</p>
+                        <p><b>Annex Offers</b></p>
+                    </div>
+
+                </div>
+                <br/>
+            </div>
         </div>
 
     );

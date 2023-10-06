@@ -22,13 +22,13 @@ export default function Search() {
                 <div className='full-bg-img' style={{maxWidth:'100%'}}>
                 </div>
 
-                <div style={{position:'absolute'}}>
-                <img src={logo} style={{width:200}} alt='logo'/>
+                <div style={{position:'absolute', marginTop:30}}>
+                    <p className='enucs' >{'['}com<span className='red'>icsX</span>{']'}</p>
                 </div>
                 <div className='full-bg-img-mask'>
 
                         <form style={{width:'100%', height:50, display:'flex', position:'relative',
-                            background:'#eee', borderRadius:25, margin:30, transition:'all 0.8s ease', opacity: opacity, alignItems:'center'
+                            background:'#eee', borderRadius:25, margin:30, transition:'all 0.8s ease', opacity: opacity, alignItems:'center', maxWidth:'900px'
                         }} className="shadow-container" onSubmit={()=> {alert("")}}>
 
                                 <input style={{border:'none', transition:'0.4s ease', marginLeft:10}} placeholder='Search Anything...'/>

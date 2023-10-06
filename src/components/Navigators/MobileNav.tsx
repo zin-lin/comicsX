@@ -37,7 +37,7 @@ export default function MobileNav () {
             <div className='mobile-nav-item4'>
                 <Link to='/' onClick={()=>dispatch(toShop())}>
                     <span className="material-symbols-outlined" style={{color: selected.v3}}>
-                    shopping_cart_checkout
+                    apps
                     </span>
                 </Link>
             </div>

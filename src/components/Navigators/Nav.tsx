@@ -17,8 +17,7 @@ export default function Nav () {
     return (
         <nav>
             <div>
-                <img className='items' src={logo} style={{fontSize:19, margin:12, marginTop:"7px", marginLeft:23, marginBottom:'auto', height:'078px'}}>
-                </img>
+                <p  style={{fontSize:24, marginLeft:20, fontWeight:'bold'}}>{'['}Annex<span className='red'>ComicsX</span>{']'}</p>
             </div>
             <div className='hider' style={{right:10, position:'absolute', display:'flex', height:'100%', alignItems:'center'}}>
                 <Link onClick={()=> dispatch(toHome())} to='/'><p style={{fontSize:16, margin:12 }}>Ho<span style={{color:"#FF5757"}}>me</span></p></Link>
@@ -28,7 +27,7 @@ export default function Nav () {
                 search
                 </span></p></Link>
                 <Link onClick={()=> dispatch(toShop())} to='/'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined red">
-                shopping_cart_checkout
+                apps
                 </span></p></Link>
             </div>
             <div className = "hider-reverse" style={{marginTop:'6px', right:0, position:'absolute' }}>
