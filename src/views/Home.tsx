@@ -8,6 +8,10 @@ import hero from '../assets/hero.jpg'
 import girl from '../assets/girl.jpg'
 import beach from '../assets/beach.jpg'
 import shelby from '../assets/shelby.jpg'
+import heroS from '../assets/hero.jpg'
+import girlS from '../assets/girl.png'
+import beachS from '../assets/beach.png'
+import shelbyS from '../assets/shelby.png'
 
 export default function Home (){
 
@@ -30,29 +34,29 @@ export default function Home (){
         setOpacity(1);
         const fullText = "comicsX is the leading society hosting contributors from all around the world. Join us explore the world of ai and comics by clicking the button below."; // The complete text to append
         let currentIndex = 0;
-        const appendText = () => {
-            if (currentIndex < fullText.length) {
+        // const appendText = () => {
+        //     if (currentIndex < fullText.length) {
+        //
+        //         let xox = ref.current + fullText[currentIndex];
+        //         setText(xox);
+        //         currentIndex ++;
+        //     }
+        // };
+        //
+        // const inId = setInterval(appendText, 10); // Append text every 100 milliseconds
+        //
+        // return () => {
+        //     clearInterval(inId); // Cleanup: Clear the interval when component unmounts
+        // };
+        setText(fullText)
 
-                let xox = ref.current + fullText[currentIndex];
-                setText(xox);
-                currentIndex ++;
-            }
-        };
-
-        const inId = setInterval(appendText, 10); // Append text every 100 milliseconds
-
-        return () => {
-            clearInterval(inId); // Cleanup: Clear the interval when component unmounts
-        };
-
-        // Call the appendText function
-        appendText();
     }, []);
 
     return (<div className='page'>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" ></link>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
             <div className='home-1'>
-                <div style={{width: '42%', background:'rgba(11, 17, 45, 0.7)', left:0, display:'flex', zIndex:15,justifyContent:'center', alignItems:"center", overflow:'auto'}} className='left-sider'>
+                <div style={{width: '42%', background:'rgba(11, 17, 45, 0.7)', left:0, display:'flex', zIndex:15,justifyContent:'center', alignItems:"center",
+                    overflow:'auto'}} className='left-sider'>
                     <div id='console' style={{transition:'0.8s ease', opacity:opacity}}>
                         <div style={{  display:"flex", alignItems:'center', justifyContent:'center'}}>
                             <div style={{margin:'20px', display:'flex'}}>
@@ -62,9 +66,11 @@ export default function Home (){
                             </div>
                         </div>
                         <div style={{paddingLeft:'40px', paddingRight:'20px'}}>
-                            <p className='web-console' style={{margin:'7px'}}><span style={{color:'grey'}}>{'>>'}</span> Hello <span className='red'>World</span></p>
+                            <p className='web-console' style={{margin:'7px'}}><span style={{color:'grey'}}>{'>>'}</span> Hello <span className='red'>World
+                            </span></p>
                             <p className='web-console small'>........</p>
-                            <p className='web-console small'>{'<'} Let <span className='red'>me</span> introduce your <span style={{color:'grey'}}>journey</span> with Com<span
+                            <p className='web-console small'>{'<'} Let <span className='red'>me</span> introduce your <span style={{color:'grey'}}>journey
+                            </span> with Com<span
                             className='red'
                             >icsX</span>{'>'}</p>
                         </div>
@@ -112,64 +118,39 @@ export default function Home (){
             </div>
 
 
+            <br/>
 
-
-            <div className='bigfor' style={{zIndex:19,marginTop:-2,
+            <div style={{background:'var(--primary)', opacity:opacity}}>
+            <div style={{zIndex:19,marginTop:-2,
                 background:'var(--primary)' ,position:'relative', padding:'0px', width:'100%'}}>
-                <div className='bigfor' style={{flex:2, display:'flex',  width:'100%',
-                    justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
-                    <div style={{display:'flex',alignItems:'center', width:'100%'}}>
-                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={shelby}>
 
-                        </img>
-                        <div style={{width:'30%', position:'relative', }}>
-                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create impeccable
-                                <span style={{color:'red'}}> Characters </span>
-                                 with the help of your <span style={{color:'red'}}>immigination </span>
-                                 and our <span style={{color:'red'}}>tools</span>{']'}</p>
-                            <div style={{display:'flex'}}>
-                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style={{flex:2, display:'flex',  width:'100%',
-                    justifyContent:"right", flexWrap:'wrap', order:2, flexDirection:'row'}}>
-                    <div className='bigfor' style={{display:'flex',alignItems:'center', justifyContent:'right', width:'100%'}}>
+                <img  style={{width:'100%', height:'auto'}} src={shelbyS}>
 
-                        <div style={{width:'30%',paddingLeft:"170px" }}>
-                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create hundreds of
-                                <span style={{color:'orange'}}> Lore </span>
-                                and fully unleash your <span style={{color:'orange'}}> potential </span>
-                                as a  <span style={{color:'orange'}}>creator</span>{']'}</p>
-                            <div style={{display:'flex'}}>
-                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
-                            </div>
-                        </div>
-                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={girl}>
+                </img>
 
-                        </img>
-                    </div>
-                </div>
-                <div className='bigfor' style={{flex:2, display:'flex',  width:'100%',
-                    justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
-                    <div style={{display:'flex',alignItems:'center', width:'100%'}}>
-                        <img className='bigfor' style={{width:'60%', height:'100%'}} src={beach}>
+            </div>
+                <br/>
+                <br/>
+            <div style={{zIndex:19,marginTop:-2,
+                background:'var(--primary)' ,position:'relative', padding:'0px', width:'100%'}}>
 
-                        </img>
-                        <div style={{width:'30%', position:'relative', }}>
-                            <p className='enucs' style={{fontWeight:'normal', fontSize:55}}>{'['}Create perfect
-                                <span style={{color:'red'}}> Scenery </span>
-                                for your stories and <span style={{color:'red'}}>contribute </span>
-                                to our <span style={{color:'red'}}>community</span>{']'}</p>
-                            <div style={{display:'flex'}}>
-                                <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img  style={{width:'100%', height:'auto'}} src={girlS}>
+
+                </img>
+
             </div>
 
+                <br/>
+                <br/>
+            <div style={{zIndex:19,marginTop:-2,
+                background:'var(--primary)' ,position:'relative', padding:'0px', width:'100%'}}>
+
+                <img  style={{width:'100%', height:'auto'}} src={beachS}>
+
+                </img>
+
+            </div>
+            </div>
             <div style={{zIndex:9, height:'auto', background:'#121126', marginTop:-2 ,position:'relative', padding:'30px'}}>
                 <br/>
                 <div style={{display:'flex', alignItems:'center', width:"100%", alignContent:'center', justifyContent:"center"}}>
