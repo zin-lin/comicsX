@@ -151,7 +151,7 @@ export default function Home (){
 
             </div>
             </div>
-            <div style={{zIndex:9, height:'auto', background:'#121126', marginTop:-2 ,position:'relative', padding:'30px'}}>
+            <div style={{zIndex:9, height:'auto', background:'#0c141f', marginTop:-2 ,position:'relative', padding:'30px'}}>
                 <br/>
                 <div style={{display:'flex', alignItems:'center', width:"100%", alignContent:'center', justifyContent:"center"}}>
                     <p style={{color:"#aaa", fontSize:23, fontWeight:"bold"}}>We Offer</p>

@@ -21,7 +21,7 @@ const initialState: RegisterState = {
  * Reducers
  */
 export const authSlice = createSlice({
-    extraReducers: undefined, initialState: {value: false, text:'Sign In To Store', selected: {v1: '#ce6565', v2: '#eee', v3: '#eee', v4: '#eee'}, enucs:""},
+    extraReducers: undefined, initialState: {value: false, text:'Sign In to Store', selected: {v1: '#ce6565', v2: '#eee', v3: '#eee', v4: '#eee'}, enucs:""},
     name: "auth", reducers: {
         LogOut:(state)=> {
             state.value =false;

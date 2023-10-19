@@ -17,7 +17,7 @@ function Renderer (){
 
     const loading = require('../assets/loading.gif')
     const navigate = useNavigate();
-    const registerOrLogin= (e:FormEvent,type:String)=>{
+    const registerOrLogin= (e:FormEvent,type:string)=>{
         e.preventDefault()
         console.log("Called")
         let email = document.getElementById("email") as HTMLInputElement| null;
@@ -28,6 +28,7 @@ function Renderer (){
 
         // This is by settings
         if (type === "Register Now"){
+            console.log("register")
             if ( object.password.length < 8 ){
                 alert("Annex: ComicsX Suggests a longer stronger Password")
                 return
@@ -43,7 +44,8 @@ function Renderer (){
 
 
                 });
-        } else if (type === "Sign In To Store") {
+        }
+        else if (type === "Sign In to Store") {
             console.log("sign in")
             axios.post('/login', object)
                 .then(response => {
@@ -55,6 +57,9 @@ function Renderer (){
                     window.location.reload()
                 });
             console.log("end call")
+        }
+        else{
+            console.log(type)
         }
     }
     let ctrl: string;

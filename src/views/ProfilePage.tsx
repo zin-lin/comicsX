@@ -17,18 +17,16 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
     const navigate = useNavigate();
     const [uname, setName] = useState("")
     const [profession, setPro] = useState("")
-    const [api, setAPI] = useState("")
+    const [api, setAPI] = useState(0)
     const [pic, setPic] = useState("")
     const uid = id
 
     // Save Changes
-    const updateDatabase = ()=>{
+    const updateDatabase = (api:number)=>{
         let picA = ""
-
-        let apiA = document.getElementById("api") as HTMLInputElement| null;
         let unameA = document.getElementById("uname") as HTMLInputElement| null;
         let proA = document.getElementById("profession") as HTMLInputElement| null;
-        let object = {uid: id, api:apiA?.value, profession: proA?.value, profile_pic:picA, name:unameA?.value}
+        let object = {uid: id, api:api, profession: proA?.value, profile_pic:picA, name:unameA?.value}
         axios.post('/update-user-details', object)
             .then(response => {
                 alert(response.data)
@@ -41,14 +39,12 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
     useEffect(()=>{
         fetch('/get-user-details/'+ uid).then(res=> res.json()).then(
             data =>{
-                let apiA = document.getElementById("api") as HTMLInputElement| null;
                 let unameA = document.getElementById("uname") as HTMLInputElement| null;
                 let proA = document.getElementById("profession") as HTMLInputElement| null;
                 setName(data.name);
                 setAPI(data.api);
                 setPic(data.profile_pic);
                 setPro(data.profession);
-                apiA!.value = data.api;
                 unameA!.value = data.name;
                 proA!.value = data.profession;
             }
@@ -85,17 +81,17 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
                   </div>
                   <br/>
 
-                  <div style={{display:"flex", alignItems:'center', justifyContent:'center', width:'100%'}}>
+                  <div style={{display:"flex", alignItems:'center', justifyContent:'left', paddingLeft:27, width:'calc(100% - 27px)'}}>
                       <span className="material-symbols-outlined" style={{color: '#ddd'}}>key</span>
-                      <input placeholder='@Your OpenAI API key ' className='noner' id="api"/>
-                      <span><u style={{color:'#aaa', fontSize:13}}>?</u></span>
+                      <p style={{color:'#777', marginLeft:30}}>API Key Tokens:</p>
+                      <p style={{color:'#333', marginLeft:50, marginRight:100}} className='highlight'>{api.toString()===""?0:api.toString()}</p>
 
                   </div>
 
                   <br/>
                   <br/>
                   <div style={{alignItems:'center', display:'flex', justifyContent:'center'}}>
-                      <button className="orangex" style={{padding:13, marginRight:20, fontSize:13}} onClick={updateDatabase} >
+                      <button className="orangex" style={{padding:13, marginRight:20, fontSize:13}} onClick={()=>updateDatabase(api)} >
                           Save Changes
                       </button>
                       <button className='redx' style={{padding:13,  fontSize:13}} onClick={()=>{
