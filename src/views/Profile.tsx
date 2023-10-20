@@ -33,7 +33,7 @@ function Renderer (){
                 alert("Annex: ComicsX Suggests a longer stronger Password")
                 return
             }
-            axios.post('/register', object)
+            axios.post('/api/register', object)
                 .then(response => {
                     console.log(response.data);
                     navigate("/");
@@ -47,7 +47,7 @@ function Renderer (){
         }
         else if (type === "Sign In to Store") {
             console.log("sign in")
-            axios.post('/login', object)
+            axios.post('/api/login', object)
                 .then(response => {
                     console.log(response.data);
                     navigate("/");
@@ -74,7 +74,7 @@ function Renderer (){
         fetch('/api/authed').then(res => res.text()).then(id => {setAuthed(id)
             setLoad(false);
             if (id !== ""){
-            fetch('api/get-user/'+ id).then(res=>res.text()).then(email=> {
+            fetch('/api/get-user/'+ id).then(res=>res.text()).then(email=> {
                     setEmail(email)
                     console.log(id)
                 }

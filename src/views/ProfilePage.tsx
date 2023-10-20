@@ -27,7 +27,7 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
         let unameA = document.getElementById("uname") as HTMLInputElement| null;
         let proA = document.getElementById("profession") as HTMLInputElement| null;
         let object = {uid: id, api:api, profession: proA?.value, profile_pic:picA, name:unameA?.value}
-        axios.post('/update-user-details', object)
+        axios.post('/api/update-user-details', object)
             .then(response => {
                 alert(response.data)
             })
@@ -37,7 +37,7 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
     }
 
     useEffect(()=>{
-        fetch('/get-user-details/'+ uid).then(res=> res.json()).then(
+        fetch('/api/get-user-details/'+ uid).then(res=> res.json()).then(
             data =>{
                 let unameA = document.getElementById("uname") as HTMLInputElement| null;
                 let proA = document.getElementById("profession") as HTMLInputElement| null;
@@ -95,7 +95,7 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
                           Save Changes
                       </button>
                       <button className='redx' style={{padding:13,  fontSize:13}} onClick={()=>{
-                          fetch("/logout").then(res=>res.text()).then(opt => {
+                          fetch("/api/logout").then(res=>res.text()).then(opt => {
                               if (opt === "Sucessful Logout"){
                                   navigate('/');
                               }
