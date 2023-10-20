@@ -15,6 +15,7 @@ import Events from "./views/Events";
 
 function App() {
   return (
+
         <R>
             <div className="App">
               <Nav/>

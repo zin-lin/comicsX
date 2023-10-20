@@ -71,10 +71,10 @@ function Renderer (){
     const [email, setEmail] = useState("");
     const [load, setLoad] = useState(true);
     useEffect(()=>{
-        fetch('/authed').then(res => res.text()).then(id => {setAuthed(id)
+        fetch('/api/authed').then(res => res.text()).then(id => {setAuthed(id)
             setLoad(false);
             if (id !== ""){
-            fetch('/get-user/'+ id).then(res=>res.text()).then(email=> {
+            fetch('api/get-user/'+ id).then(res=>res.text()).then(email=> {
                     setEmail(email)
                     console.log(id)
                 }
