@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Provider, useSelector} from "react-redux";
 import loginStore from "../redux/stateStores/loginStore";
 import {useLoginSelector, useLoginDispatch, useAuthSelector, useAuthDispatch} from "../redux/hook";
-import {toEvent, toLogin, toProfile, toRegister} from "../redux/authState";
+import { toLogin, toProfile, toRegister} from "../redux/authState";
 import EventPC from "./EventViewPorts/EventPC";
 import EventMobile from "./EventViewPorts/EventMobile";
 
@@ -12,7 +12,7 @@ export default function Events() {
     let ctrl: string;
     ctrl = useAuthSelector(state => state.auth.text);
     const dispatcher = useAuthDispatch();
-    dispatcher(toEvent());
+
     const [opacity, setOpacity] = useState(0);
 
     useEffect(() => {

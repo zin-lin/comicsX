@@ -1,7 +1,7 @@
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuthDispatch, useAuthSelector} from "../../redux/hook";
-import {toHome, toEvent, toShop, toProfile} from "../../redux/authState";
+import {toHome, toBook, toShop, toProfile} from "../../redux/authState";
 
 const navSty = {
     fontSize:16, margin:10
@@ -27,7 +27,7 @@ export default function MobileNav () {
             </div>
 
             <div className='mobile-nav-item4' >
-                <Link to='/events' onClick={()=>dispatch(toEvent())}>
+                <Link to='/events' onClick={()=>dispatch(toBook())}>
                     <span className="material-symbols-outlined" style={{color: selected.v2}}>
                     event
                     </span>

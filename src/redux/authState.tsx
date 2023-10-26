@@ -38,7 +38,7 @@ export const authSlice = createSlice({
         toHome: (state)=>{
             state.selected =  {v1: '#ce6565', v2: '#eee', v3: '#eee', v4: '#eee'}
         },
-        toEvent: (state)=>{
+        toBook: (state)=>{
             state.selected =  {v1: '#eee', v2: '#ce6565', v3: '#eee', v4: '#eee'}
         },
         toShop: (state)=>{
@@ -55,5 +55,5 @@ export const authSlice = createSlice({
         }
     }
 });
-export const {Login, LogOut, toLogin, toRegister, toHome, toShop, toEvent, toProfile, resetAllVs} = authSlice.actions;
+export const {Login, LogOut, toLogin, toRegister, toHome, toShop, toBook, toProfile, resetAllVs} = authSlice.actions;
 export default authSlice.reducer;

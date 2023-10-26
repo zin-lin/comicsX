@@ -42,11 +42,16 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
                 let unameA = document.getElementById("uname") as HTMLInputElement| null;
                 let proA = document.getElementById("profession") as HTMLInputElement| null;
                 setName(data.name);
-                setAPI(data.api);
+                if (data.api != "")
+                    setAPI( data.api);
+                else
+                    setAPI(32)
                 setPic(data.profile_pic);
                 setPro(data.profession);
+                try{
                 unameA!.value = data.name;
-                proA!.value = data.profession;
+                proA!.value = data.profession;}
+                catch (err){console.log("Annex")}
             }
         )
     },[])

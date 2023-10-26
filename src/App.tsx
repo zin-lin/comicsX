@@ -1,6 +1,6 @@
 
 import './App.css';
-import {HashRouter as R, Route, Routes } from 'react-router-dom'
+import {HashRouter as R, Route, Routes} from 'react-router-dom'
 import About from "./views/About";
 import Home from "./views/Home";
 import Nav from './components/Navigators/Nav';
@@ -12,6 +12,9 @@ import authStore from "./redux/store";
 import Search from "./views/Search";
 import loginStore from "./redux/stateStores/loginStore";
 import Events from "./views/Events";
+import BookView from "./views/BookView";
+import Books from './views/Books';
+
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
                         <Route element={<Profile/>} path='/profile' />
                         <Route element={<Events/>} path='/events' />
                         <Route element={<Search/>} path='/search' />
+                        <Route element={<Books/>} path='/books' />
+                        <Route path='/bookview/:id' element={<BookView/>}  />
                     </Routes>
               </div>
               <MobileNav/>

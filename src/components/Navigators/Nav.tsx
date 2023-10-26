@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import logo from "../../assets/logo.png";
 import {useAuthDispatch} from "../../redux/hook";
-import {toHome, toEvent, toShop, toProfile, resetAllVs} from "../../redux/authState";
+import {toHome, toShop, toProfile, resetAllVs, toBook} from "../../redux/authState";
 
 const navSty = {
     fontSize:16, margin:10
@@ -21,7 +21,7 @@ export default function Nav () {
             </div>
             <div className='hider' style={{right:10, position:'absolute', display:'flex', height:'100%', alignItems:'center'}}>
                 <Link onClick={()=> dispatch(toHome())} to='/'><p style={{fontSize:16, margin:12 }}>Ho<span style={{color:"#FF5757"}}>me</span></p></Link>
-                <Link onClick={()=> dispatch(toEvent())} to='/events'><p style={{fontSize:16, margin:12 }}>Eve<span style={{color:"#FF5757"}}>nts</span></p></Link>
+                <Link onClick={()=> dispatch(toBook())} to='/books'><p style={{fontSize:16, margin:12 }}>Bo<span style={{color:"#FF5757"}}>oks</span></p></Link>
                 <Link onClick={()=> dispatch(toProfile())} to='/profile'><p style={{fontSize:16, margin:12 }}>Pro<span style={{color:"#FF5757"}}>file </span></p></Link>
                 <Link onClick={()=> dispatch(resetAllVs())} to='/search'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined">
                 search

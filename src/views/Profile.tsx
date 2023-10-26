@@ -156,12 +156,7 @@ function Renderer (){
 }
 export default function Profile () {
 
-    /*
-    This bit has to do with talking to the BankEnd Docker
-    auth should be a listener for authentication
-    as of for now let's call it false for
-    GLOBAL AUTH HERE IF AUTHED, setAuth (true)
-    */
+    // old architecture// still works
     const authed = useAuthSelector(state => state.auth.value);
 
     return (!authed?

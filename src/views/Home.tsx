@@ -34,20 +34,6 @@ export default function Home (){
         setOpacity(1);
         const fullText = "comicsX is the leading society hosting contributors from all around the world. Join us explore the world of ai and comics by clicking the button below."; // The complete text to append
         let currentIndex = 0;
-        // const appendText = () => {
-        //     if (currentIndex < fullText.length) {
-        //
-        //         let xox = ref.current + fullText[currentIndex];
-        //         setText(xox);
-        //         currentIndex ++;
-        //     }
-        // };
-        //
-        // const inId = setInterval(appendText, 10); // Append text every 100 milliseconds
-        //
-        // return () => {
-        //     clearInterval(inId); // Cleanup: Clear the interval when component unmounts
-        // };
         setText(fullText)
 
     }, []);
