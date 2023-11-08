@@ -5,6 +5,7 @@ import {useLoginSelector, useLoginDispatch, useAuthSelector, useAuthDispatch} fr
 import {toLogin, toProfile, toRegister} from "../redux/authState";
 import axios from "axios";
 import {type} from "os";
+import user from "../assets/user.png"
 import {useNavigate} from "react-router-dom";
 
 interface Props {
@@ -57,49 +58,50 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
     },[])
 
     return (
-      <div style={{
-          background: 'rgba(240,240,240, 0.99)',
-          borderRadius: '80px 0px 60px 0px',
-          boxShadow: '2px 2px 18px 15px 0xff333333',
+      <div style={{ backgroundColor:'rgba(17,33,38,0.45)',
+          borderRadius: 40,
+          boxShadow: 'none',
+          backdropFilter:'blur(2.6px)',
           overflow: 'auto'
-      }} className="shadow-container lengify">
+      }} className="shadow-container lengify shadow-boxer">
           <div style={{padding: '20px', textAlign: 'center', justifyContent: 'center'}}>
               <div style={{width:'100%'}}>
-                 <span className="material-symbols-outlined" style={{color: 'grey'}}>person</span>
-                  <p style={{color:'#777'}}>Welcome <span className="highlight">{name}</span></p>
+                 <img src={user} width={100}/>
+                  <p style={{color:'#eee', fontSize:18}}>Welc
+                      <span style={{color:'#d02f2f'}}>ome</span> <span className="highlight-dark">{name}</span></p>
                   <br/>
                   <br/>
 
                   <div style={{display:"flex", alignItems:'center', justifyContent:'center', width:'100%'}}>
-                      <span className="material-symbols-outlined" style={{color: '#ddd'}}>book</span>
-                      <input placeholder="@User's name" className='noner'  id="uname"/>
-                      <span><u style={{color:'#aaa', fontSize:13}}>?</u></span>
+                      <span className="material-symbols-outlined" style={{color: '#757575'}}>book</span>
+                      <input placeholder="@User's name" className='noner' style={{color:'#fff'}} id="uname"/>
+                      <span><u style={{color:'#757575', fontSize:13}}>?</u></span>
 
                   </div>
                   <br/>
 
                   <div style={{display:"flex", alignItems:'center', justifyContent:'center', width:'100%'}}>
-                      <span className="material-symbols-outlined" style={{color: '#ddd'}}>wallet</span>
-                      <input placeholder='@Your Profession ' className='noner'  id="profession" />
-                      <span><u style={{color:'#aaa', fontSize:13}}>?</u></span>
+                      <span className="material-symbols-outlined" style={{color: '#757575'}}>wallet</span>
+                      <input placeholder='@Your Profession ' className='noner'  style={{color:'#fff'}}  id="profession" />
+                      <span><u style={{color:'#757575', fontSize:13}}>?</u></span>
 
                   </div>
                   <br/>
 
                   <div style={{display:"flex", alignItems:'center', justifyContent:'left', paddingLeft:27, width:'calc(100% - 27px)'}}>
-                      <span className="material-symbols-outlined" style={{color: '#ddd'}}>key</span>
-                      <p style={{color:'#777', marginLeft:30}}>API Key Tokens:</p>
-                      <p style={{color:'#333', marginLeft:50, marginRight:100}} className='highlight'>{api.toString()===""?0:api.toString()}</p>
+                      <span className="material-symbols-outlined" style={{color: '#757575'}}>key</span>
+                      <p style={{color:'#fff', marginLeft:30}}>API Key Tokens:</p>
+                      <p style={{ marginLeft:50, marginRight:100}} className='highlight-dark'>{api.toString()===""?0:api.toString()}</p>
 
                   </div>
 
                   <br/>
                   <br/>
                   <div style={{alignItems:'center', display:'flex', justifyContent:'center'}}>
-                      <button className="orangex" style={{padding:13, marginRight:20, fontSize:13}} onClick={()=>updateDatabase(api)} >
+                      <button className="orangex shOrange" style={{padding:13, marginRight:20, fontSize:13}} onClick={()=>updateDatabase(api)} >
                           Save Changes
                       </button>
-                      <button className='redx' style={{padding:13,  fontSize:13}} onClick={()=>{
+                      <button className='redx shRed' style={{padding:13,  fontSize:13}} onClick={()=>{
                           fetch("/api/logout").then(res=>res.text()).then(opt => {
                               if (opt === "Sucessful Logout"){
                                   navigate('/');

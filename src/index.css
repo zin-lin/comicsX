@@ -91,12 +91,16 @@ nav .sidenav-trigger{
 }
 
 ::placeholder{
-  color: #ccc;
+  color: #8a8a8a;
 }
 
 ::-ms-input-placeholder{
   color: #ccc;
 
+}
+
+FlatList.css {
+  max-height: 400px;
 }
 
 input{
@@ -142,6 +146,7 @@ button {
   --primary: #071322;
   --secondary: rgba(11, 17, 45, 0.7);
   --title: #fff;
+  --third : #0F3042
 }
 
 input:focus{
@@ -158,9 +163,34 @@ input.noner{
   border-bottom: 1px solid rgba(49, 49, 49, 0.079);
 }
 
+input::selection {
+  background-color: transparent; /* Set the background color to transparent */
+  color: inherit; /* Inherit the text color from the input */
+}
+
 span {
   color: #eeeeee;
 }
+
+textarea{
+  background:transparent;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  color: rgba(238, 238, 238, 0.73);
+  resize: none;
+  line-height:1.5;
+}
+
+textarea:focus{
+  border: none;
+  outline: none;
+}
+
+textarea:focus{
+  border: none;
+}
+
+
 
 /*
 ROM SPECIAL
@@ -179,6 +209,31 @@ ROM SPECIAL
 
 .text-shadow{
   text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.38);
+}
+
+.pie-chart{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+}
+
+.slice {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+}
+
+.slice.blue {
+  transform: rotate(0deg);
+  background-color: #3498db;
+}
+
+.slice.red {
+  transform: rotate(60deg);
+  background-color: #e74c3c;
 }
 
 .circle{
@@ -317,6 +372,21 @@ span.red {
   visibility: hidden;
 }
 
+.shadow-boxer{
+  backdrop-filter: blur(7px);
+  border-radius: 30px;
+  box-shadow: 4px 4px 26px rgba(2, 3, 3, 0.12);
+}
+
+.shadow-boxer-top{
+  backdrop-filter: blur(7px);
+  border-radius: 30px;
+  box-shadow: 4px 4px 26px rgba(2, 3, 3, 0.12);
+  background-image: url("assets/str.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .flex {
   display: flex;
@@ -700,6 +770,29 @@ p.aText {
   box-shadow: 2px 2px 7px rgba(100,100,100,0.4);
 }
 
+.highlight-dark{
+  border-radius: 7px;
+  padding: 5px;
+  padding-left: 14px;
+  padding-right: 14px;
+  background-color: rgba(36, 41, 42, 0.4);
+  color: #c9c9c9;
+  transition: 0.4s ease;
+}
+
+.highlight-dark:hover{
+  background-color: rgba(7, 7, 7, 0.63);
+  box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.dark{
+  color: #eee;
+}
+
+.dark ::placeholder{
+  color: #343434;
+}
+
 
 @media screen and (max-width: 900px) {
 
@@ -800,6 +893,64 @@ p.aText {
   transition: 0.4s ease;
 }
 
+
+.divider-page {
+  width: 50%;
+  height: 100%;
+
+}
+.divider-page-loss {
+  width: 50%;
+  height: 100%;
+
+}
+
+.img-side {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.appearer {
+  visibility: visible;
+  opacity: 0.8;
+  width: 100%;
+}
+
+@media screen and (max-width:1500px)
+{
+  .divider-page{
+    width: 100%;
+  }
+
+  .divider-page-loss {
+    width: 0%;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    transition: 0.4s ease;
+  }
+
+
+}
+
+@media screen and (min-width:1500px) {
+  .divider-page-loss {
+    width: 50%;
+    visibility: visible;
+    opacity: 1;
+    height: 100%;
+    transition: 0.4s ease;
+  }
+
+  .appearer {
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s ease;
+  }
+}
 
 @media screen and (max-width: 1780px)
 {
@@ -928,6 +1079,17 @@ p.aText {
   width:  100%;
   height:  100%;
 }
+
+.full-bg-img-book {
+  background-image: url("assets/bookbg.png");
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  background-size: cover;
+  position: absolute;
+  width:  100%;
+  height:  100%;
+}
+
 
 
 @media screen  and (max-width: 792px) {

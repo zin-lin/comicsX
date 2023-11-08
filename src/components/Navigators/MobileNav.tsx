@@ -27,7 +27,7 @@ export default function MobileNav () {
             </div>
 
             <div className='mobile-nav-item4' >
-                <Link to='/events' onClick={()=>dispatch(toBook())}>
+                <Link to='/books' onClick={()=>dispatch(toBook())}>
                     <span className="material-symbols-outlined" style={{color: selected.v2}}>
                     event
                     </span>

@@ -14,6 +14,8 @@ import loginStore from "./redux/stateStores/loginStore";
 import Events from "./views/Events";
 import BookView from "./views/BookView";
 import Books from './views/Books';
+import UpdateBook from "./views/UpdateBook";
+import EditBook from "./views/EditBook";
 
 
 function App() {
@@ -30,7 +32,9 @@ function App() {
                         <Route element={<Events/>} path='/events' />
                         <Route element={<Search/>} path='/search' />
                         <Route element={<Books/>} path='/books' />
-                        <Route path='/bookview/:id' element={<BookView/>}  />
+                        <Route path='/bookview/:bid' element={<BookView/>}  />
+                        <Route path='/updatebook/:bid' element={<UpdateBook/>}  />
+                        <Route path='/editbook/:bid' element={<EditBook/>}  />
                     </Routes>
               </div>
               <MobileNav/>

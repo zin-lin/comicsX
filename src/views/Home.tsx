@@ -41,7 +41,7 @@ export default function Home (){
     return (<div className='page'>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
             <div className='home-1'>
-                <div style={{width: '42%', background:'rgba(11, 17, 45, 0.7)', left:0, display:'flex', zIndex:15,justifyContent:'center', alignItems:"center",
+                <div style={{width: '42%', background:'var(--primary)', left:0, display:'flex', zIndex:15,justifyContent:'center', alignItems:"center",
                     overflow:'auto'}} className='left-sider'>
                     <div id='console' style={{transition:'0.8s ease', opacity:opacity}}>
                         <div style={{  display:"flex", alignItems:'center', justifyContent:'center'}}>
@@ -84,15 +84,17 @@ export default function Home (){
                                 ()=>{ //onCLick
                                     dispatch(toProfile()); //dispatch to profile
                                     dispatch(toRegister());
-                                    navigate('/profile');
+                                    navigate('/books');
                                 }
                             }>Create a Book Now</button>
                             <br/><br/>
                             <button className='orangex shOrange' style={{width:'200px',padding:'10px'}}
                             onClick={()=>{
-
+                                dispatch(toProfile()); //dispatch to profile
+                                dispatch(toRegister());
+                                navigate('/profile');
                             }}
-                            >My Projects</button>
+                            >Join Annex</button>
                         </div>
                     </div>
                 </div>

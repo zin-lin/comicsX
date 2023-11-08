@@ -85,18 +85,17 @@ function Renderer (){
 
 
     return (
+        <div className='page' style={{backgroundColor:'var(--primary)', margin:0}}>
+            <div style={{width:'100%', height:'100%', display:'flex', flex:1, position:'relative', transition:'0.6s ease', opacity:opacity, justifyContent:'center', alignItems:'center' }} className='full-bg-img-book'>
 
-            <div style={{width:'100%', height:'100%', display:'flex', flex:1, position:'relative', transition:'0.6s ease', opacity:opacity}}>
-                <div className='full-bg-img'>
-                </div>
-                <div className='full-bg-img-mask'>
-                    {!load? <div style={{display:"flex", justifyContent:"center"}}>{authed === "" ? <div style={{
+                    {!load? <div style={{display:"flex", justifyContent:"center", height:'100%',alignItems:'center'}}>{authed === "" ? <div style={{
                         background: 'rgb(240,240,240)',
                         height: '80%',
                         width: '80%',
-                        maxHeight: 370,
+                        maxHeight: 380,
                         maxWidth: 500,
                         minWidth: 300,
+                        minHeight:350,
                         borderRadius: 30,
                         boxShadow: '2px 2px 18px 15px 0xff333333',
                         overflow: 'auto'
@@ -149,7 +148,7 @@ function Renderer (){
                             <img src={loading} style={{width: '60px', margin: '100px'}}/>
                         </div>
                     }
-                </div>
+            </div>
             </div>
 
     );
