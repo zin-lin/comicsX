@@ -35,7 +35,7 @@ export default function MobileNav () {
             </div>
 
             <div className='mobile-nav-item4'>
-                <Link to='/' onClick={()=>dispatch(toShop())}>
+                <Link to='/events' onClick={()=>dispatch(toShop())}>
                     <span className="material-symbols-outlined" style={{color: selected.v3}}>
                     apps
                     </span>

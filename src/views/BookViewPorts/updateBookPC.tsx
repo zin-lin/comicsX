@@ -30,6 +30,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
     let [addOpacity, setAddOpacity] = useState(0)
     const [addVisibility, setAddVisibility] = useState<Visibility | undefined>('hidden')
     let [max, setMax] = useState(0)
+    let [likes, setLikes] = useState(0)
 
 
     const fileInput = useRef<HTMLInputElement>(null);
@@ -288,14 +289,22 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
             })
             console.log(data)
+        });
+        fetch(`/api/authed/`).then(res => res.text()).then(data =>{
+            let uid = data;
+            let form: FormData = new FormData();
+            form.append('uid', uid);
+            form.append('bid', bid);
+            axios.post(`/api/getlikes/ `, form).then(res => setLikes(res.data['likes']))
         })
+
     }, [index, max])
 
     return (
-       <div style={{width:'100%', height:'calc(100% - 3px)', flex:2, display:'flex', backgroundColor:'transparent', paddingTop:3}}>
+       <div className='page-loss' style={{width:'100%', flex:2, display:'flex', backgroundColor:'transparent', paddingTop:3}}>
            <div style={{width:'100%', height:'calc(100% - 140px)', position:'absolute', background:'transparent', zIndex:43, visibility:addVisibility||'hidden', opacity:addOpacity,
                flex:1, display:'flex', justifyContent:'center', transition:'0.2s ease'
-           }} >
+                 }} >
                <div style={{width:'30%',backgroundColor:'rgba(4,11,21,0.76)', borderRadius:20, backdropFilter:'blur(2.6px)', justifyContent:'center', alignItems:'center', height:100, display:'flex'}}>
                    <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                        <input style={{border:'none', borderRadius:4, width:16, color:'#eee'}} placeholder='1' id='nav'/>
@@ -385,6 +394,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
                    <div style={{width: '100%', height: '60%', flex: 2, display: 'flex'}}>
                        <div style={{width: '50%', height: '100%'}}>
+
                            <div style={{
                                margin: 40,
                                borderRadius: 30,
@@ -392,30 +402,36 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
                                height: 'calc(100% - 80px)',
                                width: 'calc(100% - 60px)',
                                backdropFilter: 'blur(7.0px)',
+                               overflow :'auto',
                                display: 'flex',
                                justifyContent: 'center',
                                alignItems: 'center'
                            }}>
-                               <div>
+                               <div style={{}}>
+                                   <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
                                    <div style={{
+                                       justifySelf:'center',
                                        background: 'rgba(16,37,40,0.7)',
-                                       width: 200,
-                                       height: 200,
+                                       width: 150,
+                                       textAlign:'center',
+                                       height: 150,
                                        borderRadius: '50%',
                                        display: 'flex',
                                        flex: 1
                                    }}>
                                        <div className='pie-chart' style={{
-                                           background: 'conic-gradient(#ff7d38 36deg , #c44040 324deg)',
+                                           background: `conic-gradient(#ff7d38 ${(likes/(Math.round(likes/10)+1 * 10))*360}deg , #c44040 ${360- (likes/(Math.round(likes/10)+1 * 10))*360}deg)`,
                                            display: 'flex',
+                                           width: '150px',
+                                           height: '150px',
                                            flex: 1,
                                            justifyContent: 'center',
                                            alignItems: 'center'
                                        }}>
                                            <div style={{
                                                margin: 'auto',
-                                               width: 180,
-                                               height: 180,
+                                               width: 130,
+                                               height: 130,
                                                background: 'rgb(16,29,40)',
                                                borderRadius: '50%'
                                            }}>
@@ -423,16 +439,17 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
                                            </div>
                                        </div>
                                    </div>
+                                   </div>
                                    <br/>
                                    <br/>
                                    <p style={{textAlign: 'center', fontSize: 24}}>My <span
                                        style={{color: '#ff9d4a', fontWeight: 'bold'}}>Goals</span></p>
-                                   <div style={{marginLeft: 35}}>
-                                       <p style={{textAlign: 'start', color:'#f36464'}}>Total Likes <span
-                                           className='highlight-dark'>90</span></p>
-
-                                       <p style={{textAlign: 'start', marginTop: 25, color:'#ff804f'}}>Goal Likes <span
-                                           className='highlight-dark'>100</span></p>
+                                   <div style={{marginLeft: 0, width:'100%', textAlign:'center'}}>
+                                       <p style={{textAlign: 'center', color:'#f36464'}}>Total Likes <span
+                                           className='highlight-dark'>{likes}</span></p>
+                                        
+                                       <p style={{textAlign: 'center', marginTop: 25, color:'#ff804f'}}>Goal Likes <span
+                                           className='highlight-dark'>{Math.round(likes/10)+1 *10}</span></p>
                                    </div>
                                </div>
                            </div>

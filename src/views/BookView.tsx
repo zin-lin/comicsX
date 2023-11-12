@@ -21,7 +21,20 @@ const BookView: React.FC= ()=>{
     let [text, setText] = useState("");
     let [max, setMax] = useState(0);
     let [opa, setOpa] = useState(0);
+    let [likes, setLikes] = useState(0);
+    const addLike = () => {
+        fetch('/api/authed').then(res => res.text()).then(id =>{
+            if (id){
+                const form: FormData = new FormData();
 
+                form.append('uid', id)
+                form.append('bid', bid!) // must exist
+                axios.post('/api/addlike/', form).then(res => {alert(`${res.data}`)
+
+                }).catch()
+            }
+        }).catch()
+    }
     const update = ()=>{
         fetch(`/api/getscene/${bid}/${index}`).then(res => res.json()).then(
             data =>{
@@ -83,6 +96,14 @@ const BookView: React.FC= ()=>{
                 }
             }
         ).catch()
+        fetch('/api/authed').then(res => res.text()).then(id =>{
+            let form : FormData = new FormData()
+            form.append('bid', bid!)
+            form.append('uid', id)
+            axios.post('/api/getlikes/', form).then(res => res.data).then(data => {
+                setLikes(data['likes'])
+            }).catch()
+        }).catch()
         setOpacity(1)
         setOpa(1)
     },[index, max])
@@ -114,7 +135,11 @@ const BookView: React.FC= ()=>{
                                 </div>
                                 <br/>
                                 <div style={{width:'100%', display:'flex', justifyContent:'center', marginTop:30,}}>
-                                    <button className='redx' style={{padding:20}} onClick={()=> incrementIndex()}>Read Scenes Now</button>
+                                    <button className='redx shRed' style={{padding:20}} onClick={()=> incrementIndex()}>Read Scenes Now</button>
+                                    <button className='bluex shBlue' style={{padding:20, marginLeft:20}} onClick={()=> addLike()}>Like Book</button>
+                                </div>
+                                <div style={{width:'100%', display:'flex', justifyContent:'center', marginTop:30,}}>
+                                    <p>👏🏻: {likes}</p>
                                 </div>
                                 <div style={{margin:40}}></div>
                             </div>
@@ -136,6 +161,8 @@ const BookView: React.FC= ()=>{
                                     onClick={incrementIndex
                             }> {' > '} </button>
                             <div style={{margin:30}}></div>
+                            <button className='highlight-dark' onClick={()=>setIndex(-1)}>Back to Book</button>
+
                         </div>
                     }
                 </div>

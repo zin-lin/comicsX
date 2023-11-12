@@ -212,9 +212,6 @@ ROM SPECIAL
 }
 
 .pie-chart{
-  position: relative;
-  width: 200px;
-  height: 200px;
   border-radius: 50%;
 
 }
@@ -913,14 +910,46 @@ p.aText {
 
 .appearer {
   visibility: visible;
-  opacity: 0.8;
+  opacity: 1;
   width: 100%;
 }
+
+.ease{
+  transition: 0.4s ease;
+}
+
+.page-loss {
+  visibility: visible;
+  width: 100%;
+  height: calc(100% - 3px);
+  opacity: 1;
+  transition: 0.4s ease;
+}
+
+.flex{
+  display: flex;
+}
+
+.page-gain {
+  visibility: hidden;
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
 
 @media screen and (max-width:1500px)
 {
   .divider-page{
     width: 100%;
+  }
+  .page-loss {
+    visibility: hidden;
+    width: 0%;
+    opacity: 0;
+    height: 0%;
+    transition: 0.4s ease;
   }
 
   .divider-page-loss {
@@ -935,6 +964,15 @@ p.aText {
 }
 
 @media screen and (min-width:1500px) {
+
+  .page-loss {
+    visibility: visible;
+    width: 100%;
+    opacity: 1.0;
+    height: calc(100% - 3px);
+    transition: 0.4s ease;
+  }
+
   .divider-page-loss {
     width: 50%;
     visibility: visible;

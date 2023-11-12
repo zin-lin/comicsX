@@ -96,7 +96,7 @@ export default function Search() {
                                                }}>
                                                    <img src={booksrc} width={60} height={60} style={{marginLeft:20, marginRight:40}}/>
                                                    <p style={{justifySelf:'left', fontWeight:'bold'}}>{book.title.length >40 ? book.title.substring(0,37) + '...': book.title}</p>
-                                                   <button className = 'orangex shOrange' style={{justifySelf:'right', marginRight: 10, marginLeft: 30,height:40, padding:10}}
+                                                   <button className = 'orangex shOrange' style={{justifySelf:'right', marginRight: 10, marginLeft: 30,height:50, padding:10}}
                                                    onClick={() => navigate(`/bookview/${book.bid}`)}
                                                    >Read Book</button>
                                                </div>

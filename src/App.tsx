@@ -16,6 +16,8 @@ import BookView from "./views/BookView";
 import Books from './views/Books';
 import UpdateBook from "./views/UpdateBook";
 import EditBook from "./views/EditBook";
+import EventAdd from "./views/EventAdd";
+import EventView from "./views/EventView";
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
                         <Route path='/bookview/:bid' element={<BookView/>}  />
                         <Route path='/updatebook/:bid' element={<UpdateBook/>}  />
                         <Route path='/editbook/:bid' element={<EditBook/>}  />
+                        <Route path='/eventadd/' element={<EventAdd/>}  />
+                        <Route path='/eventview/' element={<EventView/>}  />
                     </Routes>
               </div>
               <MobileNav/>

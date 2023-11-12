@@ -26,7 +26,7 @@ export default function Nav () {
                 <Link onClick={()=> dispatch(resetAllVs())} to='/search'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined">
                 search
                 </span></p></Link>
-                <Link onClick={()=> dispatch(toShop())} to='/'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined red">
+                <Link onClick={()=> dispatch(toShop())} to='/events'><p style={{fontSize:16, margin:12 }}><span className="material-symbols-outlined red">
                 apps
                 </span></p></Link>
             </div>
