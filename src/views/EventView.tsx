@@ -58,7 +58,7 @@ const EventView: React.FC= ()=>{
                 <div style={{flex:2, display:'flex',  height:'100%', width:'100%', justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row', alignItems:'center'}}>
 
                     <div style={{minWidth:300, width:'30%',height:500, margin:'20px', backgroundColor:'rgba(17,33,38,0.45)', display:'inline-block'}} className='shadow-boxer'>
-                        <p style={{fontSize:33, fontWeight:'bold', marginLeft:'auto', marginRight:'auto', paddingTop:10, textAlign:'center'}}>Yo<span style={{color:'#d02f2f'}}>ur</span> Boo<span style={{color:'#d02f2f'}}>ks</span></p>
+                        <p style={{fontSize:33, fontWeight:'bold', marginLeft:'auto', marginRight:'auto', paddingTop:10, textAlign:'center'}}><span style={{color:'#d02f2f'}}></span> Boo<span style={{color:'#d02f2f'}}>ks</span></p>
                         {books.length == 0?
                             <div style={{width:'100%', height:'50%', display:'flex'}}>
                                 <div style={{margin:'auto'}}>

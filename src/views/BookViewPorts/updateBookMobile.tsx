@@ -4,6 +4,7 @@ import ai from "../../assets/open.png"
 import box from "../../assets/box.png";
 import sc from "../../assets/scene.png";
 import axios from "axios";
+import FlatList from "flatlist-react/lib";
 
 interface Props{
     bid : string;
@@ -19,7 +20,7 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
     const [simage, setSimage] = useState("Select Scene Image")
     const [cimage, setCimage] = useState("Select Cover Image")
     const [mode, setMode] = useState('book')
-    const [msg, setMessage] = useState([])
+    const [msg, setMessage] = useState<Array<string>>([])
     let [sfile, setSfile] = useState<File|null>(null)
     let [index, setIndex] = useState(0);
     // let [sfileURL, setSfileURL] = useState('')
@@ -46,6 +47,7 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
 
 
     const fileInput = useRef<HTMLInputElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const coverInput = useRef<HTMLInputElement>(null);
 
     // to GPT
@@ -97,6 +99,35 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
         setVis1('hidden')
         setVis2('hidden')
         setVis3('visible')
+
+    }
+
+    // Ask Chat GPT
+    const askGPT = () =>{
+        let form : FormData = new FormData()
+        let x = [];
+        let count = 0;
+        x.push({'role':'system', 'content': 'You are a helpful assistant.'})
+
+        form.append('num', msg.length.toString());
+        msg.forEach((item, index) => {
+            form.append(`msg[${index}]`, item);
+        });
+        let input = document.getElementById('msg_mobile') as HTMLInputElement;
+
+        if (msg.length >0 && input.value !== ''){
+            input.value =''
+            axios.post('/api/ask/', form).then(res => res.data).then(
+                data => {
+                    if (data['response'] !== ''){
+                        console.log(`res :: ${data['response']}`)
+                        setMessage(prev => [...prev, (data['response']).toString()])
+                        input.disabled = false
+                        input.placeholder = 'Ask something to GPT'
+                    }
+                }
+            )
+        }
 
     }
 
@@ -355,8 +386,11 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
             })
             console.log(data)
         })
-    }, [index, max])
-
+        askGPT()
+        if (containerRef.current) {
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, [index, max, msg])
     return (
         <div className='appearer' style={{ flex:1, textAlign:'center', height:'calc(100% - 6px)' ,backgroundColor:'transparent', paddingTop:3, overflowY:'hidden'}}>
             <div style={{width:'100%', height:'calc(100% - 140px)', position:'absolute', background:'transparent', zIndex:43, visibility:addVisibility||'hidden', opacity:addOpacity,
@@ -398,9 +432,15 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
                          className='shadow-boxer'>
                         <div style={{padding:20,color:'#ddd', minWidth:300, maxHeight:40}}>
                             <p style={{textAlign:'center', fontSize:23, fontWeight:'bold', }}>Your <span style={{color:'#c44040'}}>AI</span> Assistant <span style={{color:'#c44040'}}>Server</span></p>
-                            <div style={{width:'100%', height:200, display:'flex', justifyContent:'center', alignItems:'top' }}>
-                                <img src={ai} width={100} style={{margin:'auto'}}/>
-                            </div>
+                            {msg.length === 0? <div style={{
+                                width: '100%',
+                                height: 200,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'top'
+                            }}>
+                                <img src={ai} width={100} style={{margin: 'auto'}}/>
+                            </div> : <div></div>}
 
                             <div style={{margin:30}}>
                                 <div style={{width:'100%', height:20, borderRadius:10, background:'rgba(26,43,51,0.37)'}}>
@@ -408,21 +448,41 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
 
                                     </div>
                                 </div>
-                                <p style={{textAlign:'center'}}>
-                                    GPT 3.5
+                                <p style={{textAlign:'center', boxShadow:'0px 20px 16px rgba(17,24,38,0.76)'}}>
+                                    GPT 3.5 <span className='highlight-dark'>Turbo</span>
                                 </p>
                                 { msg.length === 0?
-                                    <div style={{margin:0, padding:30, background:'rgba(26,43,51,0.37)', borderRadius:20, marginTop:60, minWidth:260}}>
-                                        <p>Start Asking Questions to <span className='highlight-dark'>AI Model</span> by connecting to ,the Server</p>
+                                    <div style={{margin:0, padding:30, background:'rgba(26,43,51,0.37)', borderRadius:20, marginTop:60}}>
+                                        <p>Start Asking Questions to <span className='highlight-dark'>AI Model</span> by connecting to the Server</p>
                                         <div style={{display:'flex', justifyContent:'center'}}>
                                             <div className='highlight-dark' style={{padding:14}}>Default Key 🔑</div>
                                         </div>
                                     </div>:
-                                    <div >
+                                    <div style={{width:'100%', height:'40vh', minHeight:'220px', overflowY:'auto'}} ref={containerRef}>
+                                        <FlatList list={msg} renderItem={(item, key)=>{
+                                            return (
+                                                <div style={{width:'calc(100% - 60px)',transition:'0.4s ease' ,padding:20, margin:10, borderRadius:30, background:'rgba(8,22,31,0.59)'}}>
+                                                    {parseInt(key) %2 ==0 ? <p>{item}</p>:<p style={{color:'rgba(231,177,138,0.49)'}}>{item}</p>}
+                                                </div>
+                                            );
+                                        }}/>
                                     </div>
 
                                 }
+                                <div style={{width:'100%', flex:1, display:'flex', justifyContent:'center'}}>
+                                    <input id = 'msg_mobile' placeholder='Ask something to GPT' style={{border:1, color:'#eee'}} onKeyDown={(eve)=> {
+                                        if (eve.key === 'Enter'){
+                                            let input = document.getElementById('msg_mobile') as HTMLInputElement;
+                                            let que = input.value; // get input value
+                                            let new_msg = [...msg, que]
+                                            setMessage(new_msg) // add que to list
+                                            input.disabled = true
+                                            input.placeholder = 'Loading...'
+                                        }
+                                    }}/>
+                                </div>
                             </div>
+
 
                         </div>
                     </div>
