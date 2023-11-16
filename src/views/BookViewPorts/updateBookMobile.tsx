@@ -124,6 +124,8 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
         let input = document.getElementById('msg_mobile') as HTMLInputElement;
 
         if (msg.length >0 && input.value !== ''){
+            save() // save changes //user doesn't have to know
+
             input.value =''
             axios.post('/api/ask/', form).then(res => res.data).then(
                 data => {

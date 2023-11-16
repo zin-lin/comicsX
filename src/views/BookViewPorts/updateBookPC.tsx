@@ -310,6 +310,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
         let form : FormData = new FormData()
         let x = [];
         let count = 0;
+
         x.push({'role':'system', 'content': 'You are a helpful assistant.'})
 
         form.append('num', msg.length.toString());
@@ -319,6 +320,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
         let input = document.getElementById('msg') as HTMLInputElement;
 
         if (msg.length >0 && input.value !== ''){
+            save() // save changes //user doesn't have to know
             input.value =''
             axios.post('/api/ask/', form).then(res => res.data).then(
                 data => {
@@ -351,7 +353,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
         }
         if (saveMode === 'write'){
             axios.post(`/api/writescene/${bid}`,form).then(response => {
-                alert('Success')
+                //alert('Success')
 
             })
                 .catch(error => {
@@ -360,7 +362,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
                 });
         }else{
             axios.post(`/api/updatescene/${bid}/${index}`,form).then(response => {
-                alert('Success')
+                //alert('Success')
 
             })
                 .catch(error => {
