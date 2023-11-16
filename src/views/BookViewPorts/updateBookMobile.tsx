@@ -45,6 +45,14 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
     let [op3, setOp3] = useState(0)
 
 
+    // for generating images
+    let [imgOpacity, setImgOpacity] = useState(0)
+    const [imgVisibility, setImgVisibility] = useState<Visibility | undefined>('hidden')
+
+
+    // gen-img
+    let [b64, setB64] = useState();
+    let [genImg, setGenImg] = useState(box);
 
     const fileInput = useRef<HTMLInputElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -369,6 +377,94 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
             setDisplaySImage(url)
         }
     }
+
+    const download = ()=>{
+        // get input
+        let input = document.getElementById('gen_name_mob' +
+            '') as HTMLInputElement;
+        let text = input!.value!; // if exist
+
+
+        // Decoding base64 to binary
+        const binaryString = atob(b64!);
+
+        // Create an array buffer from binary data
+        const arrayBuffer = new ArrayBuffer(binaryString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < binaryString.length; i++) {
+            uint8Array[i] = binaryString.charCodeAt(i);
+        }
+
+        // Create Blob from array buffer
+        const blob = new Blob([arrayBuffer], { type: 'image/png' });
+
+        // Create a download link href
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${text}.png`;
+        input.value = ''
+
+        // call sacve with click eve
+        document.body.appendChild(a);
+        a.click();
+
+        // Remove the link from the body
+        document.body.removeChild(a);
+
+
+    }
+
+    // generate Image from DallE
+    const generateImg = ()=>{
+        const input = document.getElementById('gen_mob') as HTMLInputElement;
+        let text:string = input.value;
+        let form: FormData = new FormData();
+        input.disabled = true;
+        input.value = '';
+        input.placeholder = 'Loading...'
+        form.append('prompt', text);
+        axios.post('/api/generate-image/', form).then(res => res.data).then(data =>{
+
+            if (data !== 0){
+                let imageBase64 =data['img'];
+                console.log(imageBase64)
+                const binaryString = atob(imageBase64);
+                setB64(imageBase64)
+                // Create an array buffer from binary data
+                const arrayBuffer = new ArrayBuffer(binaryString.length);
+                const uint8Array = new Uint8Array(arrayBuffer);
+                for (let i = 0; i < binaryString.length; i++) {
+                    uint8Array[i] = binaryString.charCodeAt(i);
+                }
+                const blob = new Blob([arrayBuffer], { type: 'image/png' })
+                const blobURL = URL.createObjectURL(blob);
+                setGenImg(blobURL)
+                input.placeholder = 'AI: /Your prompt Here'
+                input.disabled = false;
+            }
+
+
+        }).catch(err => {
+            alert(err)
+            input.placeholder = 'AI: /Your prompt Here'
+            input.disabled = false;
+        })
+
+    }
+
+    // call image generation tool
+    const callImgGen =()=>{
+
+        setImgOpacity(1)
+        setImgVisibility('visible')
+    }
+
+    // close navigation panel
+    const closeImgGen = ()=>{
+        setImgOpacity(0)
+        setImgVisibility('hidden')
+    }
+
     useEffect(()=>{
         fetch(`/api/getbook/${bid}`).then(res => res.json()).then(data =>{
             setTitle(data['title']);
@@ -405,6 +501,37 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
                     </div>
                 </div>
             </div>
+
+            <div style={{width:'100%', position:'absolute', background:'transparent', zIndex:43, visibility:imgVisibility||'hidden', opacity:imgOpacity,
+                flex:1, display:'flex', justifyContent:'center', transition:'0.2s ease'
+            }} >
+                <div style={{width:'40%',minWidth:300,backgroundColor:'rgba(6,14,26,0.68)', borderRadius:20, backdropFilter:'blur(2.6px)', margin:20 , boxShadow:'0px 3px 6px rgba(253,22,234,0.23)',
+                    padding: 50, justifyContent:'center', alignItems:'center',  display:'flex', overflowY:'auto'}}>
+                    <div>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                            <img src={ai} width={40}/>
+                        </div>
+                        <div style={{display:'flex', justifyContent:'center', alignItems:'center', }}>
+                            <input style={{border:'none', borderRadius:4,  color:'#eee'}} placeholder='AI: /Your prompt Here' id='gen_mob'/>
+
+                        </div>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                            <img src={genImg} width={300} style={{borderRadius:20, marginBottom:20}} id='save'/>
+                        </div>
+
+                        <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginBottom:20 }}>
+                            <input style={{border:'none', borderRadius:4,  color:'#eee'}} placeholder='Name your Image here' id='gen_name_mob'/>
+
+                        </div>
+                        <div style={{display:'flex', flex:3, justifyContent:'center'}}>
+                            <button style={{padding:10}} className='orangex shOrange' onClick={generateImg}>Generate</button>
+                            <button style={{marginLeft:10, padding:10}} className='redx shRed' onClick={closeImgGen}>Close</button>
+                            <button style={{marginLeft:10, padding:10}} className='bluex shBlue' onClick={download}>Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div className='highlight-dark' style={{display:'flex',
                 width:'calc(100% - 70px)', margin:20, flex:3, borderRadius:60, height:85, alignItems:'center'}}>
 
@@ -448,9 +575,15 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
 
                                     </div>
                                 </div>
-                                <p style={{textAlign:'center', boxShadow:'0px 20px 16px rgba(17,24,38,0.76)'}}>
-                                    GPT 3.5 <span className='highlight-dark'>Turbo</span>
-                                </p>
+                                <div style={{textAlign:'center',marginTop:9, boxShadow:'0px 20px 10px rgba(17,24,38,0.46)', alignItems:'center', padding:3, display:'flex',
+                                    justifyContent:'center'
+                                }}>
+                                    GPT 3.5 <span className='highlight-dark' style={{marginLeft:7, padding:7.3}}>Turbo</span>
+                                    <span style={{marginLeft:7}} onClick={callImgGen}
+                                          className="material-symbols-outlined highlight-dark">
+                            add_photo_alternate
+                            </span>
+                                </div>
                                 { msg.length === 0?
                                     <div style={{margin:0, padding:30, background:'rgba(26,43,51,0.37)', borderRadius:20, marginTop:60}}>
                                         <p>Start Asking Questions to <span className='highlight-dark'>AI Model</span> by connecting to the Server</p>

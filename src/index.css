@@ -56,6 +56,7 @@ App{
 }
 
 ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
   background: rgba(11, 15, 23, 0.58);
 
 }
@@ -119,11 +120,18 @@ input{
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
+input:-webkit-autofill:window-inactive,
 input:-webkit-autofill:focus,
+input:-webkit-autofill:not(:focus),
 input:-webkit-autofill:active{
-  outline: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #eeeeee;
+  -webkit-text-stroke-color: #eeeeee;
+}
+
+input:not(:focus){
+  background-color: transparent;
   background: transparent;
-  -webkit-box-shadow: 0 0 0 30px rgb(240,240,240)  inset !important;
 }
 
 button {
@@ -163,9 +171,10 @@ input.noner{
   border-bottom: 1px solid rgba(49, 49, 49, 0.079);
 }
 
-input::selection {
+select{
   background-color: transparent; /* Set the background color to transparent */
   color: inherit; /* Inherit the text color from the input */
+  background: transparent;
 }
 
 span {
@@ -464,7 +473,7 @@ button.greenx {
 /*
 Blue X
  */
-button.bluex {
+.bluex {
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
   color: #ffffff;
@@ -481,11 +490,31 @@ button.bluex {
   box-shadow: 1px 1px 10px 1px rgba(0, 81, 255, 0.45);
 }
 
+/*Purple X
+ */
+
+.purplex {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #ffffff;
+  background-color: #e826af;
+}
+.purplex:hover {
+  background-color: #811a70;
+}
+
+.purplex:focus {
+  background-color: #811a70;
+}
+.shPurple {
+  box-shadow: 1px 1px 10px 1px rgba(247, 0, 255, 0.34);
+}
+
 /*
 Red X
  */
 
-button.redx {
+.redx {
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
@@ -506,7 +535,7 @@ button.redx {
 Orange X
  */
 
-button.orangex {
+.orangex {
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
@@ -1104,6 +1133,7 @@ p.aText {
 }
 
 .full-bg-img-mask::-webkit-scrollbar-thumb {
+  border-radius: 3px;
   background: rgba(11, 15, 23, 0.58);
 
 }

@@ -1,4 +1,4 @@
-
+// Author: Zin Lin Htun
 import './App.css';
 import {HashRouter as R, Route, Routes} from 'react-router-dom'
 import About from "./views/About";
@@ -18,11 +18,17 @@ import UpdateBook from "./views/UpdateBook";
 import EditBook from "./views/EditBook";
 import EventAdd from "./views/EventAdd";
 import EventView from "./views/EventView";
+import Payment from "./views/Payment";
+import {Elements} from "@stripe/react-stripe-js";
+import { loadStripe } from '@stripe/stripe-js';
 
-
+// main app
 function App() {
-  return (
+    const stripePromise = loadStripe('pk_live_51NxvYwD1g0rvAfP0LaRO56WuC4UHLpgzv3JygPCMUTFc9uzOyf1PnSJA6ENmn09wULD6EhAoBjBSTnh113umcF9J00cGlrblvo');
 
+  return (
+        // wrap around navigation
+      <Elements stripe={stripePromise}>
         <R>
             <div className="App">
               <Nav/>
@@ -39,12 +45,15 @@ function App() {
                         <Route path='/editbook/:bid' element={<EditBook/>}  />
                         <Route path='/eventadd/' element={<EventAdd/>}  />
                         <Route path='/eventview/' element={<EventView/>}  />
+                        <Route path='/pay/:uid' element={<Payment/>}  />
                     </Routes>
               </div>
               <MobileNav/>
             </div>
         </R>
+      </Elements>
   );
 }
 
+// Exporting app to bundles
 export default App;

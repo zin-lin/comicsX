@@ -6,6 +6,8 @@ import sc from "../../assets/scene.png";
 import axios from "axios";
 import list from "../List";
 import FlatList from "flatlist-react/lib";
+import Markdown from "react-markdown";
+import {saveAs} from 'file-saver';
 
 interface Props{
     bid : string;
@@ -24,17 +26,31 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
     const [msg, setMessage] = useState<Array<string>>([])
     let [sfile, setSfile] = useState<File|null>(null)
     let [index, setIndex] = useState(0);
-    // let [sfileURL, setSfileURL] = useState('')
     let [tfileVal, setTfileVal] = useState('')
+    let [b64, setB64] = useState();
+    let [uid, setUid] = useState();
     let inx = 0;
+
+
     let [displaySImage, setDisplaySImage] = useState(box)
     let [saveMode, setSaveMode] = useState('write')
+
+    // for nav bar
     let [addOpacity, setAddOpacity] = useState(0)
     const [addVisibility, setAddVisibility] = useState<Visibility | undefined>('hidden')
+
+    // for generating images
+    let [imgOpacity, setImgOpacity] = useState(0)
+    const [imgVisibility, setImgVisibility] = useState<Visibility | undefined>('hidden')
+
+    // maximums
     let [max, setMax] = useState(0)
     let [likes, setLikes] = useState(0)
 
+    // gen-img
+    let [genImg, setGenImg] = useState(box);
 
+    // references
     const fileInput = useRef<HTMLInputElement>(null);
     const coverInput = useRef<HTMLInputElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -47,25 +63,133 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
         newScence()
     }
 
+    // call navigate
     const callNavigate =()=>{
         fetch(`/api/getscene-latest/${bid}`).then(res=>res.json()).then(data=> {
-                console.log(data.index+1)
-                setMax(data.index+1)
+            console.log(data.index+1)
+            setMax(data.index+1)
 
         })
         setAddOpacity(1)
         setAddVisibility('visible')
     }
+
+    // close navigation panel
     const closeNavigate = ()=>{
         setAddOpacity(0)
         setAddVisibility('hidden')
     }
+
+    const download = ()=>{
+        // get input
+        let input = document.getElementById('gen_name') as HTMLInputElement;
+        let text = input!.value!; // if exist
+
+
+        try{// Decoding base64 to binary
+            const binaryString = atob(b64!);
+
+            // Create an array buffer from binary data
+            const arrayBuffer = new ArrayBuffer(binaryString.length);
+            const uint8Array = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < binaryString.length; i++) {
+                uint8Array[i] = binaryString.charCodeAt(i);
+            }
+
+            // Create Blob from array buffer
+            const blob = new Blob([arrayBuffer], {type: 'image/png'});
+
+            // Create a download link href
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${text === '' ? 'cmx' : text}.png`;
+            input.value = ''
+
+            // call sacve with click eve
+            document.body.appendChild(a);
+            a.click();
+
+            // Remove the link from the body
+            document.body.removeChild(a);
+        }catch (err){
+            alert('No Image')
+        }
+
+    }
+
+    // generate Image from DallE
+    const generateImg =  ()=>{
+        let uuid:string = '';
+        fetch(`/api/authed`).then(res=> res.text()).then(id=>{
+            uuid = id;
+            // only after getting uid
+            axios.post(`/api/get-tokens/${uuid}`).then(res=>res.data).then(data=>{
+                let api :number = parseInt(data);
+                // if sufficient tokens
+                if (api >0){
+                    const input = document.getElementById('gen') as HTMLInputElement;
+                    let text:string = input.value;
+                    let form: FormData = new FormData();
+                    input.disabled = true;
+                    input.value = '';
+                    input.placeholder = 'Loading...'
+                    form.append('prompt', text);
+                    axios.post('/api/generate-image/', form).then(res => res.data).then(data =>{
+                        // if success
+                        if (data !== 0){
+                            let imageBase64 =data['img'];
+                            console.log(imageBase64)
+                            const binaryString = atob(imageBase64);
+                            setB64(imageBase64)
+                            // Create an array buffer from binary data
+                            const arrayBuffer = new ArrayBuffer(binaryString.length);
+                            const uint8Array = new Uint8Array(arrayBuffer);
+                            for (let i = 0; i < binaryString.length; i++) {
+                                uint8Array[i] = binaryString.charCodeAt(i);
+                            }
+                            const blob = new Blob([arrayBuffer], { type: 'image/png' })
+                            const blobURL = URL.createObjectURL(blob);
+                            setGenImg(blobURL)
+                            input.placeholder = 'AI: /Your prompt Here'
+                            input.disabled = false;
+                            fetch(`/api/reduce-tokens/${uuid}`).then(res=>res.text()).then().catch()
+                        }
+
+
+                    }).catch(err => {
+                        alert(err)
+                        input.placeholder = 'AI: /Your prompt Here'
+                        input.disabled = false;
+                    })
+                } else{
+                    alert('Insuffcient Tokens')
+                }
+            })
+        }
+        ).catch()
+    }
+
+    // call image generation tool
+    const callImgGen =()=>{
+
+        setImgOpacity(1)
+        setImgVisibility('visible')
+    }
+
+    // close navigation panel
+    const closeImgGen = ()=>{
+        setImgOpacity(0)
+        setImgVisibility('hidden')
+    }
+
+    // handle file choose
     const handleChoose = () => {
         if (fileInput.current) {
             fileInput.current.click();
         }
     };
 
+    // handle file change
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -84,12 +208,16 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
         }
     }
+
+    // for cover photo
     const handleChooseCover = () => {
         if (coverInput.current) {
             coverInput.current.click();
         }
     };
 
+
+    // rerender appropriately indexed scenes
     const newScence = () => {
         setSfile(null)
         setTfileVal('')
@@ -277,9 +405,11 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
             }
         }
         inx--;
+
         setIndex(inx => inx-1)
         newScence()
     }
+
 
     const nav = ()=>{
         const nav = document.getElementById('nav') as HTMLInputElement;
@@ -340,12 +470,42 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
            <div style={{width:'100%', height:'calc(100% - 140px)', position:'absolute', background:'transparent', zIndex:43, visibility:addVisibility||'hidden', opacity:addOpacity,
                flex:1, display:'flex', justifyContent:'center', transition:'0.2s ease'
                  }} >
-               <div style={{width:'30%',backgroundColor:'rgba(4,11,21,0.76)', borderRadius:20, backdropFilter:'blur(2.6px)', justifyContent:'center', alignItems:'center', height:100, display:'flex'}}>
+               <div style={{width:'30%',backgroundColor:'rgba(4,11,21,0.76)', borderRadius:20, backdropFilter:'blur(2.6px)',
+                   justifyContent:'center', alignItems:'center', height:100, display:'flex', marginTop:100 ,boxShadow:'0px 3px 6px rgba(253,22,234,0.23)'}}>
                    <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                        <input style={{border:'none', borderRadius:4, width:16, color:'#eee'}} placeholder='1' id='nav'/>
                        <p style={{marginRight:10, marginLeft:10}}>of {max}</p>
                        <button className='highlight-dark' onClick={nav}>Navigate</button>
                        <button className='highlight-dark' style={{marginLeft:10,color:'#c25454'}} onClick={closeNavigate}>Close</button>
+                   </div>
+               </div>
+           </div>
+           <div style={{width:'100%', position:'absolute', background:'transparent', zIndex:43, visibility:imgVisibility||'hidden', opacity:imgOpacity,
+               flex:1, display:'flex', justifyContent:'center', transition:'0.2s ease'
+           }} >
+               <div style={{width:'40%',minWidth:300,backgroundColor:'rgba(6,14,26,0.68)', borderRadius:20, backdropFilter:'blur(2.6px)', margin:20 , boxShadow:'0px 3px 6px rgba(253,22,234,0.23)',
+                    padding: 50, justifyContent:'center', alignItems:'center',  display:'flex', overflowY:'auto'}}>
+                   <div>
+                       <div style={{display:'flex', justifyContent:'center'}}>
+                            <img src={ai} width={40}/>
+                       </div>
+                       <div style={{display:'flex', justifyContent:'center', alignItems:'center', }}>
+                            <input style={{border:'none', borderRadius:4,  color:'#eee'}} placeholder='AI: /Your prompt Here' id='gen'/>
+
+                       </div>
+                       <div style={{display:'flex', justifyContent:'center'}}>
+                           <img src={genImg} width={300} style={{borderRadius:20, marginBottom:20}} id='save'/>
+                       </div>
+
+                       <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginBottom:20 }}>
+                           <input style={{border:'none', borderRadius:4,  color:'#eee'}} placeholder='Name your Image here' id='gen_name'/>
+
+                       </div>
+                       <div style={{display:'flex', flex:3, justifyContent:'center'}}>
+                           <button style={{padding:10}} className='orangex shOrange' onClick={generateImg}>Generate</button>
+                           <button style={{marginLeft:10, padding:10}} className='redx shRed' onClick={closeImgGen}>Close</button>
+                           <button style={{marginLeft:10, padding:10}} className='bluex shBlue' onClick={download}>Download</button>
+                       </div>
                    </div>
                </div>
            </div>
@@ -369,9 +529,15 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
                            </div>
                        </div>
-                       <p style={{textAlign:'center', boxShadow:'0px 20px 10px rgba(17,24,38,0.46)'}}>
-                           GPT 3.5 <span className='highlight-dark'>Turbo</span>
-                       </p>
+                       <div style={{textAlign:'center',marginTop:9, boxShadow:'0px 20px 10px rgba(17,24,38,0.46)', alignItems:'center', padding:3, display:'flex',
+                           justifyContent:'center'
+                       }}>
+                           GPT 3.5 <span className='highlight-dark' style={{marginLeft:7, padding:7.3}}>Turbo</span>
+                           <span style={{marginLeft:7}} onClick={callImgGen}
+                           className="material-symbols-outlined highlight-dark">
+                            add_photo_alternate
+                            </span>
+                       </div>
                        { msg.length === 0?
                            <div style={{margin:0, padding:30, background:'rgba(26,43,51,0.37)', borderRadius:20, marginTop:60}}>
                                <p>Start Asking Questions to <span className='highlight-dark'>AI Model</span> by connecting to the Server</p>
@@ -382,8 +548,10 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
                            <div style={{width:'100%', height:'60vh', minHeight:'220px', overflowY:'auto'}} ref={containerRef}>
                                 <FlatList list={msg} renderItem={(item, key)=>{
                                     return (
-                                        <div style={{width:'calc(100% - 60px)',transition:'0.4s ease' ,padding:20, margin:10, borderRadius:30, background:'rgba(8,22,31,0.59)'}}>
-                                            {parseInt(key) %2 ==0 ? <p>{item}</p>:<p style={{color:'rgba(231,177,138,0.49)'}}><span style={{color:'#e35353'}}>GPT:</span> {item}</p>}
+                                        <div style={{width:'calc(100% - 60px)',transition:'0.4s ease' ,padding:20, margin:10, borderRadius:30, background:'rgba(8,22,31,0.59)',
+                                        lineHeight:1.5
+                                        }}>
+                                            {parseInt(key) %2 ==0 ? <p>{item}</p>:<p style={{color:'rgba(231,177,138,0.49)'}}><span style={{color:'#e35353'}}>GPT:</span><Markdown>{item}</Markdown></p>}
                                         </div>
                                     );
                                 }}/>

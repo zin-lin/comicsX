@@ -1,3 +1,4 @@
+// Author : Zin Lin Htun
 import React, {PropsWithChildren, useEffect, useState} from "react";
 import {Provider, useSelector} from "react-redux";
 import loginStore from "../redux/stateStores/loginStore";
@@ -16,6 +17,7 @@ interface Props {
 const ProfilePage: React.FC<Props>= ({name, id})=>{
 
     const navigate = useNavigate();
+    // states
     const [uname, setName] = useState("")
     const [profession, setPro] = useState("")
     const [api, setAPI] = useState(0)
@@ -46,7 +48,7 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
                 if (data.api != "")
                     setAPI( data.api);
                 else
-                    setAPI(32)
+                    setAPI(0)
                 setPic(data.profile_pic);
                 setPro(data.profession);
                 try{
@@ -92,7 +94,9 @@ const ProfilePage: React.FC<Props>= ({name, id})=>{
                       <span className="material-symbols-outlined" style={{color: '#757575'}}>key</span>
                       <p style={{color:'#fff', marginLeft:30}}>API Key Tokens:</p>
                       <p style={{ marginLeft:50, marginRight:100}} className='highlight-dark'>{api.toString()===""?0:api.toString()}</p>
-
+                      {name !== ''?<button className='highlight-dark' onClick={() => {
+                          navigate(`/pay/${uid}`)
+                      }}>Add Images</button>:<div></div>}
                   </div>
 
                   <br/>
