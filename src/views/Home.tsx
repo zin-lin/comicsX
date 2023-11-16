@@ -139,13 +139,15 @@ export default function Home (){
 
             </div>
             </div>
-            <div style={{zIndex:9, height:'auto', background:'#0c141f', marginTop:-2 ,position:'relative', padding:'30px'}}>
+            <div style={{zIndex:9, height:'auto', background:'var(--primary)', marginTop:-2 ,position:'relative', padding:'30px'}}>
                 <br/>
                 <div style={{display:'flex', alignItems:'center', width:"100%", alignContent:'center', justifyContent:"center"}}>
                     <p style={{color:"#aaa", fontSize:23, fontWeight:"bold"}}>We Offer</p>
                 </div>
                 <div style={{flex:2, display:'flex',  height:'auto', width:'auto', justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
-                    <div style={{borderRadius:12,background:'#ff8b4f', height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
+
+                    <div style={{borderRadius:12,background:'transparent', boxShadow:'0px 3px 6px rgba(255,128,36,0.51)',
+                        height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
                         <div style={{display:'flex'}}>
                             <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
                         </div>
@@ -153,21 +155,27 @@ export default function Home (){
                             "</p>
                         <p><b>Fact 1</b></p>
                     </div>
-                    <div style={{borderRadius:12,background:'#f14d66', height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
+
+                    <div style={{borderRadius:12,background:'transparent', boxShadow:'0px 3px 6px rgba(241,77,102,0.51)',
+                        height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
                         <div style={{display:'flex'}}>
                             <div className='circle' style={{background:'white'}}></div><div className='circle' style={{background:'orange'}}></div>
                         </div>
                         <p>Annex's newest project after the launch of AnnexFood, this is a more optimistic project with higher scope</p>
                         <p><b>Powered by @Annex</b></p>
                     </div>
-                    <div style={{borderRadius:12,background:'#FF5757', height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
+
+                    <div style={{borderRadius:12,background:'transparent', boxShadow:'0px 3px 6px rgba(244,87,255,0.51)',
+                        height:'100%', padding:'20px', margin:'20px', color:"#ccc"}} className='wrap-text-white'>
                         <div style={{display:'flex'}}>
                             <div className='circle' style={{background:'white'}}></div><div className='circle back-pink' ></div>
                         </div>
                         <p>Use the latest embedded AI technologies from OpenAI and more to help you write stories, revise, create and generate ideas</p>
                         <p><b>With OpenAI's help</b></p>
                     </div>
-                    <div style={{borderRadius:12,background:'#ff8b4f', height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
+
+                    <div style={{borderRadius:12,background:'transparent', boxShadow:'0px 3px 6px rgba(79,255,161,0.51)',
+                        height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
                         <div style={{display:'flex'}}>
                             <div className='circle' style={{background:'white'}}></div><div className='circle back-pink' ></div>
                         </div>
