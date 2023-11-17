@@ -338,37 +338,40 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
     const save = () =>{
         // remember to allow only if they have text values
-        const textarea = document.getElementById('text') as HTMLTextAreaElement;
-        if (textarea.value.length === 0) {
-            alert('scene is empty cannot be saved')
-            return;
-        }
-        console.log(`Unchange: ${index}`)
-        // Save Current Index
-        let form = new FormData();
-        form.append('text', textarea.value.replace(/\r\n/g, '\n').replace(/\n\n/g, '\n'))
-        if (sfile)
-        {
-            form.append('img', sfile, sfile.name)
-        }
-        if (saveMode === 'write'){
-            axios.post(`/api/writescene/${bid}`,form).then(response => {
-                //alert('Success')
+        try{
+            const textarea = document.getElementById('text') as HTMLTextAreaElement;
+            if (textarea.value.length === 0) {
+               // alert('scene is empty cannot be saved')
+                return;
+            }
+            console.log(`Unchange: ${index}`)
+            // Save Current Index
+            let form = new FormData();
+            form.append('text', textarea.value.replace(/\r\n/g, '\n').replace(/\n\n/g, '\n'))
+            if (sfile) {
+                form.append('img', sfile, sfile.name)
+            }
+            if (saveMode === 'write') {
+                axios.post(`/api/writescene/${bid}`, form).then(response => {
+                    //alert('Success')
 
-            })
-                .catch(error => {
-                    alert(error);
+                })
+                    .catch(error => {
+                        alert(error);
 
-                });
-        }else{
-            axios.post(`/api/updatescene/${bid}/${index}`,form).then(response => {
-                //alert('Success')
+                    });
+            } else {
+                axios.post(`/api/updatescene/${bid}/${index}`, form).then(response => {
+                    //alert('Success')
 
-            })
-                .catch(error => {
-                    alert(error);
+                })
+                    .catch(error => {
+                        alert(error);
 
-                });
+                    });
+            }
+        }catch (err){
+
         }
     }
     const saveAndPrev = () => {

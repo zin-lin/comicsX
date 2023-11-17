@@ -147,6 +147,7 @@ export default function Home (){
                 <div style={{flex:2, display:'flex',  height:'auto', width:'auto', justifyContent:"center", flexWrap:'wrap', order:2, flexDirection:'row'}}>
 
                     <div style={{borderRadius:12,background:'transparent', boxShadow:'0px 3px 6px rgba(255,128,36,0.51)',
+
                         height:'100%', padding:'20px', margin:'20px', color:"#ddd"}} className='wrap-text-white'>
                         <div style={{display:'flex'}}>
                             <div className='circle' style={{background:'white'}}></div><div className='circle back-red'></div>
