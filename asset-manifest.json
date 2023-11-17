@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fe6cb3de.css",
+    "main.js": "/static/js/main.cd908106.js",
+    "static/js/787.22103d49.chunk.js": "/static/js/787.22103d49.chunk.js",
+    "static/media/comp.png": "/static/media/comp.e3658c2f36489ee25215.png",
+    "static/media/mar.png": "/static/media/mar.cf9445e16075d22cbf8d.png",
+    "static/media/jedi.png": "/static/media/jedi.8761efd96c97b3425321.png",
+    "static/media/jan.png": "/static/media/jan.c371255658149cec2f6e.png",
+    "static/media/feb.png": "/static/media/feb.0f1b98d6c54835f50b7a.png",
+    "static/media/str.png": "/static/media/str.0faf975e0314a810b992.png",
+    "static/media/girl.png": "/static/media/girl.56a34f122e9bc96e4329.png",
+    "static/media/beach.png": "/static/media/beach.ba91cdb36526cdaca0be.png",
+    "static/media/bookbg.png": "/static/media/bookbg.22df900317f40b9f2fcb.png",
+    "static/media/shelby.png": "/static/media/shelby.556873bb32ee48e78e96.png",
+    "static/media/dar.png": "/static/media/dar.df98d553d44eaec712a9.png",
+    "static/media/cmx.png": "/static/media/cmx.161017aedea2559d09f2.png",
+    "static/media/code.jpg": "/static/media/code.0b2fcdfd708df9f5d719.jpg",
+    "static/media/tro.png": "/static/media/tro.48cc6581e39155878fb4.png",
+    "static/media/user.png": "/static/media/user.f74ea0265518d60185c9.png",
+    "static/media/scene.png": "/static/media/scene.6e69bcbd7c5335c7e05d.png",
+    "static/media/book.png": "/static/media/book.1f9650abd36f9d59751b.png",
+    "static/media/box.png": "/static/media/box.74913d96633847bdd5de.png",
+    "static/media/loading.gif": "/static/media/loading.88b9b742d5e2534c0e62.gif",
+    "index.html": "/index.html",
+    "main.fe6cb3de.css.map": "/static/css/main.fe6cb3de.css.map",
+    "main.cd908106.js.map": "/static/js/main.cd908106.js.map",
+    "787.22103d49.chunk.js.map": "/static/js/787.22103d49.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe6cb3de.css",
+    "static/js/main.cd908106.js"
+  ]
+}
