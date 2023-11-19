@@ -338,7 +338,9 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
     const save = () =>{
         // remember to allow only if they have text values
+        console.log('entered save')
         try{
+            console.log('entered try')
             const textarea = document.getElementById('text') as HTMLTextAreaElement;
             if (textarea.value.length === 0) {
                // alert('scene is empty cannot be saved')
@@ -354,7 +356,8 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
             if (saveMode === 'write') {
                 axios.post(`/api/writescene/${bid}`, form).then(response => {
                     //alert('Success')
-
+                    newScence()
+                    console.log('written')
                 })
                     .catch(error => {
                         alert(error);
@@ -370,7 +373,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
                     });
             }
-            newScence()
+
         }catch (err){
 
         }
