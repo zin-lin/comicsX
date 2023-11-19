@@ -296,6 +296,7 @@ const UpdateBookMobile: React.FC<Props>= (props:Props)=>{
             }
             if (saveMode === 'write') {
                 axios.post(`/api/writescene/${bid}`, form).then(response => {
+                    newScence()
 
 
                 })
