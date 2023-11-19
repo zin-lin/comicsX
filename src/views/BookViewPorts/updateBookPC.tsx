@@ -219,6 +219,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
     // rerender appropriately indexed scenes
     const newScence = () => {
+        console.log(`New Scene, scene ${index+1}`)
         setSfile(null)
         setTfileVal('')
         console.log(`This is the index: ${index}`)
@@ -271,7 +272,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
             alert('scene is empty cannot be saved')
             return;
         }
-        console.log(`Unchange: ${index}`)
+        console.log(`Scene: ${index+1}`)
         // Save Current Index
         let form = new FormData();
         form.append('text', textarea.value.replace(/\r\n/g, '\n').replace(/\n\n/g, '\n'))
@@ -303,7 +304,6 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
         inx++;
 
         // recall new scene
-        newScence()
     }
 
     const askGPT = () =>{
@@ -370,6 +370,7 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
 
                     });
             }
+            newScence()
         }catch (err){
 
         }
