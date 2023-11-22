@@ -125,8 +125,8 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:not(:focus),
 input:-webkit-autofill:active{
   -webkit-background-clip: text;
-  -webkit-text-fill-color: #eeeeee;
-  -webkit-text-stroke-color: #eeeeee;
+  -webkit-text-fill-color: #aaa;
+  -webkit-text-stroke-color: #aaa;
 }
 
 input:not(:focus){

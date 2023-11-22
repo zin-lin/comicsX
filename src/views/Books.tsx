@@ -29,10 +29,14 @@ const Books: React.FC= ()=>{
     const [addVisibility, setAddVisibility] = useState<Visibility | undefined>('hidden')
 
     useEffect(()=>{
-        fetch('/api/authed').then(res => res.text()).then(id => {setAuthed(id)
+        console.log('visited books')
+        fetch('/api/authed').then(res => res.text()).then(id => {
+
+            console.log(id)
             if (id === ""){
                 navigate('/profile') // This is to limit only users who are authenticated
               }
+
             else {
                 fetch('/api/get-titles/' + id).then(
                    res=> res.json()
@@ -41,7 +45,9 @@ const Books: React.FC= ()=>{
                     setBooks(list)
                 })
             }
+            setAuthed(id)
         }).catch()
+
         setOpacity(1)
     },[])
 

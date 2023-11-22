@@ -30,7 +30,7 @@ export default function Home (){
     enucs = useAuthSelector(state => state.auth.enucs);
 
     useEffect(() => {
-        fetch("/home").then(res =>res.text()).then(data=> setHome(data));
+
         setOpacity(1);
         const fullText = "comicsX is the leading society hosting contributors from all around the world. Join us explore the world of ai and comics by clicking the button below."; // The complete text to append
         let currentIndex = 0;

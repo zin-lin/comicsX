@@ -50,6 +50,7 @@ function Renderer (){
             axios.post('/api/login', object)
                 .then(response => {
                     console.log(response.data);
+                    fetch('/api/authed').then(res => res.text()).then(id => {console.log(id)})
                     navigate("/");
                 })
                 .catch(error => {

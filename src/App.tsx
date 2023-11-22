@@ -21,10 +21,12 @@ import EventView from "./views/EventView";
 import Payment from "./views/Payment";
 import {Elements} from "@stripe/react-stripe-js";
 import { loadStripe } from '@stripe/stripe-js';
+import {createProxyMiddleware, RequestHandler} from 'http-proxy-middleware';
 
 // main app
 function App() {
     const stripePromise = loadStripe('pk_live_51NxvYwD1g0rvAfP0LaRO56WuC4UHLpgzv3JygPCMUTFc9uzOyf1PnSJA6ENmn09wULD6EhAoBjBSTnh113umcF9J00cGlrblvo');
+
 
   return (
         // wrap around navigation
