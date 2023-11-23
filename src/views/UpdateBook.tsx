@@ -11,11 +11,13 @@ const UpdateBook: React.FC= ()=>{
 
     const navigate = useNavigate();
     useEffect(()=>{
-        fetch('/api/authed').then(res=>res.text()).then(id => {
-            if (id.length === 0 || id === ''){
-                navigate('/')
-            }
-        })
+        try{
+            fetch('/api/authed').then(res => res.text()).then(id => {
+                if (id.length === 0 || id === '') {
+                    navigate('/')
+                }
+            }).catch()
+        }catch (e){}
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
