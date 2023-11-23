@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import UpdateBookPC from "./BookViewPorts/updateBookPC";
 import UpdateBookMobile from "./BookViewPorts/updateBookMobile";
 
@@ -9,7 +9,13 @@ const UpdateBook: React.FC= ()=>{
     const [opacity, setOpacity] = useState(0.0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    const navigate = useNavigate();
     useEffect(()=>{
+        fetch('/api/authed').then(res=>res.text()).then(id => {
+            if (id.length === 0 || id === ''){
+                navigate('/')
+            }
+        })
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
