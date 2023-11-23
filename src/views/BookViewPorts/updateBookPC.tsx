@@ -152,7 +152,6 @@ const UpdateBookPC: React.FC<Props>= (props:Props)=>{
                             setGenImg(blobURL)
                             input.placeholder = 'AI: /Your prompt Here'
                             input.disabled = false;
-                            fetch(`/api/reduce-tokens/${uuid}`).then(res=>res.text()).then().catch()
                         }
 
 
