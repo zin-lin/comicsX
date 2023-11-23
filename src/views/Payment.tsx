@@ -48,15 +48,12 @@ const Payment:React.FC = () =>{
         try{
             axios.post(`/api/pay/${tid}/${amount}`).then(res => res.data).then(
                 data => {
+                    alert(data)
+                    setVisibility('hidden')
+                    setOpacity(0)
 
-                    if (data['status'] === 'success') {
-                        axios.post(`/api/add-tokens/${amount}`).then(resp => resp.data).then(data1 => {alert(data1)
-                            setVisibility('hidden')
-                            setOpacity(0)
-                        }).catch()
-                    }
                 }
-            )
+            ).catch(err=> alert(err))
         }catch (err){
             alert(err);
         }
